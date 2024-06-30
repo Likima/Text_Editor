@@ -1,0 +1,6 @@
+#ifndef INPUT_PROCESSING_HPP
+#define INPUT_PROCESSING_HPP
+
+void talk()
+
+#endif // INPUT_PROCESSING_HPP

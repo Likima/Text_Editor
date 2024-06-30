@@ -269,10 +269,4 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/SDL2/SDL_locale.h /usr/include/SDL2/SDL_misc.h \
  /usr/include/GL/glew.h /usr/include/c++/11/cstddef /usr/include/GL/glu.h \
  /usr/include/GL/gl.h /usr/include/SDL2/SDL_opengl.h \
- /home/brandon/Text_Editor/src/glfw_functions.hpp \
- /usr/include/GLFW/glfw3.h /home/brandon/Text_Editor/src/render.hpp \
- /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc
+ /home/brandon/Text_Editor/src/input_processing.hpp

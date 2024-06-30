@@ -129,6 +129,30 @@ Text_Editor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/build
 .PHONY : Text_Editor/fast
 
+src/input_processing.o: src/input_processing.cpp.o
+.PHONY : src/input_processing.o
+
+# target to build an object file
+src/input_processing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o
+.PHONY : src/input_processing.cpp.o
+
+src/input_processing.i: src/input_processing.cpp.i
+.PHONY : src/input_processing.i
+
+# target to preprocess a source file
+src/input_processing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.i
+.PHONY : src/input_processing.cpp.i
+
+src/input_processing.s: src/input_processing.cpp.s
+.PHONY : src/input_processing.s
+
+# target to generate assembly for a file
+src/input_processing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.s
+.PHONY : src/input_processing.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Text_Editor"
+	@echo "... src/input_processing.o"
+	@echo "... src/input_processing.i"
+	@echo "... src/input_processing.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

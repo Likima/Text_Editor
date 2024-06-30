@@ -6,14 +6,12 @@
 #define GL_GLEXT_PROTOTYPES
 #include <SDL2/SDL_opengl.h>
 
-#include "glfw_functions.hpp"
-#include "render.hpp"
+#include "input_processing.hpp"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
-
+;
 int main() {
-
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         fprintf(stderr, "ERROR: Could not initialize SDL: %s\n", SDL_GetError());
         return 1;

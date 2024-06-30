@@ -1,0 +1,3 @@
+/home/brandon/Text_Editor/build/CMakeFiles/Text_Editor.dir
+/home/brandon/Text_Editor/build/CMakeFiles/edit_cache.dir
+/home/brandon/Text_Editor/build/CMakeFiles/rebuild_cache.dir

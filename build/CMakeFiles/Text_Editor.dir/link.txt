@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Text_Editor.dir/src/main.cpp.o -o Text_Editor  /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/x86_64-linux-gnu/libGLU.so /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 /usr/lib/x86_64-linux-gnu/libGLEW.so /usr/lib/x86_64-linux-gnu/libfreetype.so 

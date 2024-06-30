@@ -97,6 +97,7 @@ Text_Editor: /usr/lib/x86_64-linux-gnu/libGLU.so
 Text_Editor: /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 Text_Editor: /usr/lib/x86_64-linux-gnu/libGLEW.so
 Text_Editor: /usr/lib/x86_64-linux-gnu/libfreetype.so
+Text_Editor: /usr/lib/x86_64-linux-gnu/libSDL2.so
 Text_Editor: CMakeFiles/Text_Editor.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Text_Editor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Text_Editor.dir/link.txt --verbose=$(VERBOSE)

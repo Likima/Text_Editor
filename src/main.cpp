@@ -1,90 +1,64 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
+
+#include <SDL2/SDL.h>
+#define GLEW_STATIC
+#include <GL/glew.h>
+#define GL_GLEXT_PROTOTYPES
+#include <SDL2/SDL_opengl.h>
 
 #include "glfw_functions.hpp"
 #include "render.hpp"
 
-float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
-    0.0f, 0.5f, 0.0f
-}; // vertices for a triangle
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 int main() {
-    // Initialize GLFW
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return -1;
+
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        fprintf(stderr, "ERROR: Could not initialize SDL: %s\n", SDL_GetError());
+        return 1;
     }
 
-    // Set GLFW context version to 3.3 and core profile
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    SDL_Window *window =
+        SDL_CreateWindow("Hello World!",
+                         0, 0,
+                         SCREEN_WIDTH, SCREEN_HEIGHT,
+                         SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+    // Creation of a window
 
-    // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Text Editor", NULL, NULL);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
+    if (window == NULL) {
+        fprintf(stderr, "ERROR: Could not create SDL window: %s\n", SDL_GetError());
+        return 1;
     }
 
-    // Make the window's context current
-    glfwMakeContextCurrent(window);
+    {
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    // Initialize GLEW
-    glewExperimental = GL_TRUE; // Needed for core profile
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        return -1;
+        int major;
+        int minor;
+        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
+        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
+        printf("GL version %d.%d\n", major, minor);
     }
 
-    // Set the viewport
-    glViewport(0, 0, 800, 600);
-
-    // Register the framebuffer size callback
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    // Shader Compilation
-    std::string vertexSource = loadShaderSource("../shaders/vertex_shader.glsl");
-    std::string fragmentSource = loadShaderSource("../shaders/fragment_shader.glsl");
-
-    GLuint shaderProgram = createShaderProgram(vertexSource, fragmentSource);
-
-    // Playing around with vertices
-    unsigned int VAO;
-
-    glGenVertexArrays(1, &VAO);
-
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VAO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    
-    glUseProgram(shaderProgram);
-    glDrawArrays(GL_TRIANGLES,0,3);
-
-    // Main loop
-    while (!glfwWindowShouldClose(window)) {
-        // Process input
-        processInput(window);
-
-        // Render here
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Swap front and back buffers
-        glfwSwapBuffers(window);
-
-        // Poll for and process events
-        glfwPollEvents();
+    if (SDL_GL_CreateContext(window) == NULL) {
+        fprintf(stderr, "ERROR: Could not create OpenGL context: %s\n", SDL_GetError());
+        return 1;
     }
 
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    bool quit = false;
+    while(!quit){
+        SDL_Event event = {0};
+        while(SDL_PollEvent(&event)){
+            switch(event.type){
+                case(SDL_QUIT): {
+                    quit = true;
+                }
+                break;
+            }
+        }
+    }
     return 0;
 }

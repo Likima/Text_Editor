@@ -5,6 +5,8 @@
 #include <GL/glew.h>
 #define GL_GLEXT_PROTOTYPES
 #include <SDL2/SDL_opengl.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H  
 
 #include "input_processing.hpp"
 
@@ -12,6 +14,21 @@
 #define SCREEN_HEIGHT 600
 ;
 int main() {
+
+    FT_Library ft;
+    if (FT_Init_FreeType(&ft))
+    {
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        return -1;
+    }
+    
+    FT_Face face;
+    if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face))
+    {
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;  
+        return -1;
+    }
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         fprintf(stderr, "ERROR: Could not initialize SDL: %s\n", SDL_GetError());
         return 1;
@@ -53,6 +70,10 @@ int main() {
             switch(event.type){
                 case(SDL_QUIT): {
                     quit = true;
+                }
+                break;
+                case(SDL_TEXTINPUT): { // Retrieve text from user.
+                    std::cout<<event.text.text<<std::endl;
                 }
                 break;
             }

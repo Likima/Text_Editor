@@ -513,16 +513,99 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/GL/glu.h \
   /usr/include/GL/gl.h \
   /usr/include/SDL2/SDL_opengl.h \
+  /usr/include/freetype2/ft2build.h \
+  /usr/include/freetype2/freetype/config/ftheader.h \
+  /usr/include/c++/11/map \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/stl_map.h \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/stl_multimap.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/freetype2/freetype/freetype.h \
+  /usr/include/freetype2/freetype/config/ftconfig.h \
+  /usr/include/freetype2/freetype/config/ftoption.h \
+  /usr/include/freetype2/freetype/config/ftstdlib.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+  /usr/include/setjmp.h \
+  /usr/include/freetype2/freetype/config/integer-types.h \
+  /usr/include/freetype2/freetype/config/public-macros.h \
+  /usr/include/freetype2/freetype/config/mac-support.h \
+  /usr/include/freetype2/freetype/fttypes.h \
+  /usr/include/freetype2/freetype/ftsystem.h \
+  /usr/include/freetype2/freetype/ftimage.h \
+  /usr/include/freetype2/freetype/fterrors.h \
+  /usr/include/freetype2/freetype/ftmoderr.h \
+  /usr/include/freetype2/freetype/fterrdef.h \
   ../src/input_processing.hpp
 
 
 ../src/input_processing.hpp:
+
+/usr/include/freetype2/freetype/ftmoderr.h:
+
+/usr/include/freetype2/freetype/ftsystem.h:
+
+/usr/include/freetype2/freetype/fttypes.h:
+
+/usr/include/freetype2/freetype/config/mac-support.h:
+
+/usr/include/freetype2/freetype/config/public-macros.h:
+
+/usr/include/freetype2/freetype/config/integer-types.h:
+
+/usr/include/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/freetype2/freetype/config/ftstdlib.h:
+
+/usr/include/freetype2/freetype/config/ftoption.h:
+
+/usr/include/c++/11/bits/stl_multimap.h:
+
+/usr/include/c++/11/bits/uses_allocator.h:
+
+/usr/include/c++/11/array:
+
+/usr/include/limits.h:
+
+/usr/include/c++/11/bits/stl_relops.h:
+
+/usr/include/c++/11/tuple:
+
+/usr/include/c++/11/bits/stl_tree.h:
+
+/usr/include/c++/11/map:
+
+/usr/include/freetype2/freetype/config/ftheader.h:
 
 /usr/include/SDL2/SDL_opengl.h:
 
 /usr/include/GL/glu.h:
 
 /usr/include/SDL2/SDL_locale.h:
+
+/usr/include/c++/11/bits/stl_map.h:
 
 /usr/include/SDL2/SDL_render.h:
 
@@ -550,6 +633,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/SDL2/SDL_scancode.h:
 
+/usr/include/c++/11/bits/invoke.h:
+
 /usr/include/SDL2/SDL_keycode.h:
 
 /usr/include/SDL2/SDL_keyboard.h:
@@ -557,6 +642,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/SDL2/SDL_blendmode.h:
 
 /usr/include/SDL2/SDL_rect.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
 
 /usr/include/SDL2/SDL_pixels.h:
 
@@ -625,6 +712,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avxintrin.h:
 
 /usr/include/c++/11/bits/stl_construct.h:
+
+/usr/include/linux/limits.h:
 
 /usr/include/c++/11/bits/basic_string.h:
 
@@ -750,6 +839,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/linux/errno.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
+
 /usr/include/c++/11/debug/debug.h:
 
 /usr/include/features-time64.h:
@@ -777,6 +868,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/xsaveoptintrin.h:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/freetype2/freetype/fterrdef.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vnnivlintrin.h:
 
@@ -836,6 +929,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
+/usr/include/freetype2/freetype/fterrors.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/SDL2/SDL_version.h:
@@ -877,6 +972,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/SDL2/SDL_misc.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+
+/usr/include/freetype2/freetype/ftimage.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
 
@@ -952,9 +1049,13 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/fxsrintrin.h:
 
+/usr/include/c++/11/ext/aligned_buffer.h:
+
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/clflushoptintrin.h:
+
+/usr/include/c++/11/bits/erase_if.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx2intrin.h:
 
@@ -1014,11 +1115,15 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
+/usr/include/freetype2/freetype/config/ftconfig.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/cetintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h:
 
 /usr/include/c++/11/system_error:
+
+/usr/include/c++/11/utility:
 
 /usr/include/c++/11/ios:
 
@@ -1090,6 +1195,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/SDL2/SDL_mutex.h:
 
+/usr/include/freetype2/ft2build.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
@@ -1128,6 +1235,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/SDL2/SDL_cpuinfo.h:
 
+/usr/include/freetype2/freetype/freetype.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/x86gprintrin.h:
 
 /usr/include/SDL2/SDL_platform.h:
@@ -1135,6 +1244,8 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/cldemoteintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/tsxldtrkintrin.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /usr/include/c++/11/string:
 

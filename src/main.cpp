@@ -27,11 +27,26 @@ const char* VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char* FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
+    switch(action) {
+        case(GLFW_PRESS): {
+            switch(key) {
+                case(GLFW_KEY_ESCAPE): {
+                    glfwSetWindowShouldClose(window, GL_TRUE);
+                }
+                break;
+                default:
+                    std::cout<<key<<std::endl;
+            }
+        }
+        break;
     }
 }
 
+void char_callback(GLFWwindow* window, unsigned int codepoint) {
+    std::cout << "Character input: " << static_cast<char>(codepoint) << std::endl;
+}
+
+// Not too sure what this does. Fixes seg fault though!
 static void load_gl_extensions(void)
 {
     // TODO: check for failtures?
@@ -176,25 +191,42 @@ int main() {
         std::cout << "Error Initializing GLEW" << std::endl;
     }
     glfwSetKeyCallback(window, key_callback);
+    // Set character callback
+    glfwSetCharCallback(window, char_callback);
 
 
     GLuint vert_shader = 0;
+    GLuint frag_shader = 0;
     if(!compileShader(VERTEX_SHADER_PATH, GL_VERTEX_SHADER, &vert_shader)){
+        std::cout << "Failure to compile vertex shader" << std::endl;
         return(-1);
     }
-    //createShaderProgram(VERTEX_SHADER_PATH, FRAG_SHADER_PATH);
-    //bool quit = false;
-    //while(!quit) {
-        while (!glfwWindowShouldClose(window)) {
-            // Render here
-            glClear(GL_COLOR_BUFFER_BIT);
+    if(!compileShader(FRAG_SHADER_PATH, GL_FRAGMENT_SHADER, &frag_shader)){
+        std::cout << "Failure to compile frag shader " << std::endl;
+        return(-1);
+    }
+    GLuint program = 0;
+    if(!createShaderProgram(vert_shader,frag_shader,&program)){
+        std::cout << "Failure to link programs" << std::endl;
+        return(-1);
+    }
 
-            // Swap front and back buffers
-            glfwSwapBuffers(window);
+    glUseProgram(program);
 
-            // Poll for and process events
-            glfwPollEvents();
-        }
+    GLuint vao = 0;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    while (!glfwWindowShouldClose(window)) {
+        // Render here
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        // Swap front and back buffers
+        glfwSwapBuffers(window);
+        // Poll for and process events
+        glfwPollEvents();
+    }
     //}
 
     glfwDestroyWindow(window);

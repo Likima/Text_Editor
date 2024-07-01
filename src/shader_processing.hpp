@@ -11,6 +11,6 @@
 
 bool compileShader(const char* source, GLenum type, GLuint* shader);
 bool compileShaderFromSource(const GLchar *source, GLenum type, GLuint *shader);
-GLuint createShaderProgram(const char* vertexSource, const char* fragmentSource);
+bool createShaderProgram(GLuint vert_shader, GLuint frag_shader, GLuint *program);
 
 #endif //SHADER_PROCESSING.HPP

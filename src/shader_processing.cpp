@@ -54,7 +54,6 @@ fail:
 
 bool compileShaderFromSource(const GLchar *source, GLenum type, GLuint *shader) {
     *shader = glCreateShader(type);
-    std::cout << "Made it past here!" << std::endl;
     glShaderSource(*shader, 1, &source, NULL);
     glCompileShader(*shader);
 
@@ -85,3 +84,26 @@ bool compileShader(const char* filePath, GLenum type, GLuint* shader) {
     free(slurped_file);
     return compiled;
 }
+
+bool createShaderProgram(GLuint vert_shader, GLuint frag_shader, GLuint *program) {
+    *program = glCreateProgram();
+
+    glAttachShader(*program, vert_shader);
+    glAttachShader(*program, frag_shader);
+    glLinkProgram(*program);
+
+    GLint success;
+    glGetProgramiv(*program, GL_LINK_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetProgramInfoLog(*program, 512, nullptr, infoLog);
+        std::cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+        return false;
+    }
+
+    glDeleteShader(vert_shader);
+    glDeleteShader(frag_shader);
+
+    return true;
+}
+

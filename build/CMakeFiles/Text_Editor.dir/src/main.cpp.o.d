@@ -143,133 +143,9 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/SDL2/SDL.h \
- /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
- /usr/include/SDL2/SDL_config.h \
- /usr/include/x86_64-linux-gnu/SDL2/_real_SDL_config.h \
- /usr/include/SDL2/SDL_platform.h /usr/include/SDL2/begin_code.h \
- /usr/include/SDL2/close_code.h /usr/include/c++/11/stdlib.h \
- /usr/include/string.h /usr/include/strings.h /usr/include/inttypes.h \
- /usr/include/c++/11/math.h /usr/include/c++/11/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h \
- /usr/include/SDL2/SDL_assert.h /usr/include/SDL2/SDL_atomic.h \
- /usr/include/SDL2/SDL_platform.h /usr/include/SDL2/SDL_audio.h \
- /usr/include/SDL2/SDL_error.h /usr/include/SDL2/SDL_endian.h \
- /usr/include/SDL2/SDL_mutex.h /usr/include/SDL2/SDL_thread.h \
- /usr/include/SDL2/SDL_rwops.h /usr/include/SDL2/SDL_clipboard.h \
- /usr/include/SDL2/SDL_cpuinfo.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/immintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/x86gprintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/ia32intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/adxintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/bmiintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/bmi2intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/cetintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/cldemoteintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/clflushoptintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/clwbintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/clzerointrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/enqcmdintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/fxsrintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/lzcntintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/lwpintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/movdirintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/mwaitintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/mwaitxintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/pconfigintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/popcntintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/pkuintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/rdseedintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/rtmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/serializeintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/sgxintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/tbmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/tsxldtrkintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/uintrintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/waitpkgintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/wbnoinvdintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xsaveintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xsavecintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xsaveoptintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xsavesintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xtestintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/hresetintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/pmmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/tmmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/smmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/wmmintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avxintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avxvnniintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx2intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512fintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512erintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512pfintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512cdintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512bwintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512dqintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vlbwintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vldqintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512ifmaintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512ifmavlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vbmiintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vbmivlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx5124fmapsintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx5124vnniwintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vpopcntdqintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vbmi2intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vbmi2vlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vnniintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vnnivlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vpopcntdqvlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512bitalgintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vp2intersectintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vp2intersectvlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/shaintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/fmaintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/f16cintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/gfniintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/vaesintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/vpclmulqdqintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512bf16vlintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512bf16intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/amxtileintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/amxint8intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/amxbf16intrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/prfchwintrin.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/keylockerintrin.h \
- /usr/include/SDL2/SDL_events.h /usr/include/SDL2/SDL_video.h \
- /usr/include/SDL2/SDL_pixels.h /usr/include/SDL2/SDL_rect.h \
- /usr/include/SDL2/SDL_surface.h /usr/include/SDL2/SDL_blendmode.h \
- /usr/include/SDL2/SDL_keyboard.h /usr/include/SDL2/SDL_keycode.h \
- /usr/include/SDL2/SDL_scancode.h /usr/include/SDL2/SDL_mouse.h \
- /usr/include/SDL2/SDL_joystick.h /usr/include/SDL2/SDL_gamecontroller.h \
- /usr/include/SDL2/SDL_sensor.h /usr/include/SDL2/SDL_quit.h \
- /usr/include/SDL2/SDL_gesture.h /usr/include/SDL2/SDL_touch.h \
- /usr/include/SDL2/SDL_filesystem.h /usr/include/SDL2/SDL_haptic.h \
- /usr/include/SDL2/SDL_hidapi.h /usr/include/SDL2/SDL_hints.h \
- /usr/include/SDL2/SDL_loadso.h /usr/include/SDL2/SDL_log.h \
- /usr/include/SDL2/SDL_messagebox.h /usr/include/SDL2/SDL_metal.h \
- /usr/include/SDL2/SDL_power.h /usr/include/SDL2/SDL_render.h \
- /usr/include/SDL2/SDL_shape.h /usr/include/SDL2/SDL_system.h \
- /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
- /usr/include/SDL2/SDL_locale.h /usr/include/SDL2/SDL_misc.h \
- /usr/include/GL/glew.h /usr/include/c++/11/cstddef /usr/include/GL/glu.h \
- /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
- /usr/include/SDL2/SDL_opengl.h /usr/include/freetype2/ft2build.h \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/GL/glew.h \
+ /usr/include/c++/11/cstddef /usr/include/GL/glu.h /usr/include/GL/gl.h \
+ /usr/include/GLFW/glfw3.h /usr/include/freetype2/ft2build.h \
  /usr/include/freetype2/freetype/config/ftheader.h \
  /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
@@ -290,7 +166,9 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/linux/limits.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/setjmp.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/c++/11/stdlib.h \
+ /usr/include/setjmp.h \
  /usr/include/freetype2/freetype/config/integer-types.h \
  /usr/include/freetype2/freetype/config/public-macros.h \
  /usr/include/freetype2/freetype/config/mac-support.h \
@@ -302,9 +180,20 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/freetype2/freetype/fterrdef.h \
  /home/brandon/Text_Editor/src/input_processing.hpp \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
+ /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
  /usr/include/glm/detail/setup.hpp /usr/include/c++/11/cassert \
  /usr/include/assert.h /usr/include/glm/simd/platform.h \
  /usr/include/c++/11/climits /usr/include/c++/11/cfloat \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h \
  /usr/include/c++/11/limits /usr/include/glm/fwd.hpp \
  /usr/include/glm/detail/qualifier.hpp /usr/include/glm/detail/setup.hpp \
  /usr/include/glm/vec2.hpp /usr/include/glm/ext/vector_bool2.hpp \
@@ -417,4 +306,10 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
  /usr/include/glm/detail/func_integer.inl \
  /home/brandon/Text_Editor/src/initialization.hpp \
- /home/brandon/Text_Editor/src/shader_processing.hpp
+ /home/brandon/Text_Editor/src/shader_processing.hpp \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc \
+ /home/brandon/Text_Editor/src/glextloader.hpp

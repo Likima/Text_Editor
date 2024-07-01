@@ -1,15 +1,6 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <GL/glew.h>
-#include <GL/gl.h>
+#include "shader_processing.hpp"
 
-
-
-char *slurp_file_into_malloced_cstr(const char *file_path)
-{
-    // Credit to tsoding for this function
+char *slurp_file_into_malloced_cstr(const char *file_path) {
     FILE *f = NULL;
     char *buffer = NULL;
     long size = 0;
@@ -61,46 +52,36 @@ fail:
     return NULL;
 }
 
-GLuint* compileShader(const char* source, GLenum type) {
-    const char* slurped_file = slurp_file_into_malloced_cstr(source);
-    GLuint *shader;
-    std::cout<< slurp_file_into_malloced_cstr(source) << std::endl;
-    
+bool compileShaderFromSource(const GLchar *source, GLenum type, GLuint *shader) {
     *shader = glCreateShader(type);
-
-    glShaderSource(*shader, 1, &slurped_file, NULL);
+    std::cout << "Made it past here!" << std::endl;
+    glShaderSource(*shader, 1, &source, NULL);
     glCompileShader(*shader);
 
-    GLint success;
+    GLint success = 0;
     glGetShaderiv(*shader, GL_COMPILE_STATUS, &success);
     if (!success) {
         char infoLog[512];
         glGetShaderInfoLog(*shader, 512, NULL, infoLog);
         std::cerr << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
+        return false;
     }
-    return shader;
+    return true;
 }
 
-GLuint* createShaderProgram(const char* vertexSource, const char* fragmentSource) {
-    GLuint* vertexShader = compileShader(vertexSource, GL_VERTEX_SHADER);
-    GLuint* fragmentShader = compileShader(fragmentSource, GL_FRAGMENT_SHADER);
+bool compileShader(const char* filePath, GLenum type, GLuint* shader) {
+    char* slurped_file = slurp_file_into_malloced_cstr(filePath);
+    if (!slurped_file) {
+        std::cerr << "Failed to read file: " << filePath << std::endl;
+        return false;
+    }
+    std::cout << "Shader file contents:\n" << slurped_file << std::endl;
 
-    GLuint* shaderProgram;
-    *shaderProgram = glCreateProgram();
-    glAttachShader(*shaderProgram, *vertexShader);
-    glAttachShader(*shaderProgram, *fragmentShader);
-    glLinkProgram(*shaderProgram);
-
-    GLint success;
-    glGetProgramiv(*shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
-        char infoLog[512];
-        glGetProgramInfoLog(*shaderProgram, 512, nullptr, infoLog);
-        std::cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+    bool compiled = compileShaderFromSource(slurped_file, type, shader);
+    if (!compiled) {
+        std::cerr << "Failed to compile shader" << std::endl;
     }
 
-    glDeleteShader(*vertexShader);
-    glDeleteShader(*fragmentShader);
-
-    return shaderProgram;
+    free(slurped_file);
+    return compiled;
 }

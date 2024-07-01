@@ -69,10 +69,24 @@ include CMakeFiles/Text_Editor.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Text_Editor.dir/flags.make
 
+CMakeFiles/Text_Editor.dir/src/initialization.cpp.o: CMakeFiles/Text_Editor.dir/flags.make
+CMakeFiles/Text_Editor.dir/src/initialization.cpp.o: ../src/initialization.cpp
+CMakeFiles/Text_Editor.dir/src/initialization.cpp.o: CMakeFiles/Text_Editor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Text_Editor.dir/src/initialization.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Text_Editor.dir/src/initialization.cpp.o -MF CMakeFiles/Text_Editor.dir/src/initialization.cpp.o.d -o CMakeFiles/Text_Editor.dir/src/initialization.cpp.o -c /home/brandon/Text_Editor/src/initialization.cpp
+
+CMakeFiles/Text_Editor.dir/src/initialization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Text_Editor.dir/src/initialization.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/brandon/Text_Editor/src/initialization.cpp > CMakeFiles/Text_Editor.dir/src/initialization.cpp.i
+
+CMakeFiles/Text_Editor.dir/src/initialization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Text_Editor.dir/src/initialization.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/brandon/Text_Editor/src/initialization.cpp -o CMakeFiles/Text_Editor.dir/src/initialization.cpp.s
+
 CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o: CMakeFiles/Text_Editor.dir/flags.make
 CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o: ../src/input_processing.cpp
 CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o: CMakeFiles/Text_Editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o -MF CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o.d -o CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o -c /home/brandon/Text_Editor/src/input_processing.cpp
 
 CMakeFiles/Text_Editor.dir/src/input_processing.cpp.i: cmake_force
@@ -86,7 +100,7 @@ CMakeFiles/Text_Editor.dir/src/input_processing.cpp.s: cmake_force
 CMakeFiles/Text_Editor.dir/src/main.cpp.o: CMakeFiles/Text_Editor.dir/flags.make
 CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Text_Editor.dir/src/main.cpp.o: CMakeFiles/Text_Editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Text_Editor.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Text_Editor.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Text_Editor.dir/src/main.cpp.o -MF CMakeFiles/Text_Editor.dir/src/main.cpp.o.d -o CMakeFiles/Text_Editor.dir/src/main.cpp.o -c /home/brandon/Text_Editor/src/main.cpp
 
 CMakeFiles/Text_Editor.dir/src/main.cpp.i: cmake_force
@@ -97,16 +111,34 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Text_Editor.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/brandon/Text_Editor/src/main.cpp -o CMakeFiles/Text_Editor.dir/src/main.cpp.s
 
+CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: CMakeFiles/Text_Editor.dir/flags.make
+CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing.cpp
+CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: CMakeFiles/Text_Editor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o -MF CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o.d -o CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o -c /home/brandon/Text_Editor/src/shader_processing.cpp
+
+CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/brandon/Text_Editor/src/shader_processing.cpp > CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.i
+
+CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/brandon/Text_Editor/src/shader_processing.cpp -o CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.s
+
 # Object files for target Text_Editor
 Text_Editor_OBJECTS = \
+"CMakeFiles/Text_Editor.dir/src/initialization.cpp.o" \
 "CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o" \
-"CMakeFiles/Text_Editor.dir/src/main.cpp.o"
+"CMakeFiles/Text_Editor.dir/src/main.cpp.o" \
+"CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o"
 
 # External object files for target Text_Editor
 Text_Editor_EXTERNAL_OBJECTS =
 
+Text_Editor: CMakeFiles/Text_Editor.dir/src/initialization.cpp.o
 Text_Editor: CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o
 Text_Editor: CMakeFiles/Text_Editor.dir/src/main.cpp.o
+Text_Editor: CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o
 Text_Editor: CMakeFiles/Text_Editor.dir/build.make
 Text_Editor: /usr/lib/x86_64-linux-gnu/libGL.so
 Text_Editor: /usr/lib/x86_64-linux-gnu/libGLU.so
@@ -115,7 +147,7 @@ Text_Editor: /usr/lib/x86_64-linux-gnu/libGLEW.so
 Text_Editor: /usr/lib/x86_64-linux-gnu/libfreetype.so
 Text_Editor: /usr/lib/x86_64-linux-gnu/libSDL2.so
 Text_Editor: CMakeFiles/Text_Editor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Text_Editor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/brandon/Text_Editor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Text_Editor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Text_Editor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -270,15 +270,6 @@ OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 SDL2_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/SDL2
 
 //Value Computed by CMake
-TextEditorProject_BINARY_DIR:STATIC=/home/brandon/Text_Editor/build
-
-//Value Computed by CMake
-TextEditorProject_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-TextEditorProject_SOURCE_DIR:STATIC=/home/brandon/Text_Editor
-
-//Value Computed by CMake
 Text_Editor_BINARY_DIR:STATIC=/home/brandon/Text_Editor/build
 
 //Value Computed by CMake

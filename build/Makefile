@@ -129,6 +129,30 @@ Text_Editor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/build
 .PHONY : Text_Editor/fast
 
+src/initialization.o: src/initialization.cpp.o
+.PHONY : src/initialization.o
+
+# target to build an object file
+src/initialization.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/initialization.cpp.o
+.PHONY : src/initialization.cpp.o
+
+src/initialization.i: src/initialization.cpp.i
+.PHONY : src/initialization.i
+
+# target to preprocess a source file
+src/initialization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/initialization.cpp.i
+.PHONY : src/initialization.cpp.i
+
+src/initialization.s: src/initialization.cpp.s
+.PHONY : src/initialization.s
+
+# target to generate assembly for a file
+src/initialization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/initialization.cpp.s
+.PHONY : src/initialization.cpp.s
+
 src/input_processing.o: src/input_processing.cpp.o
 .PHONY : src/input_processing.o
 
@@ -177,6 +201,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/shader_processing.o: src/shader_processing.cpp.o
+.PHONY : src/shader_processing.o
+
+# target to build an object file
+src/shader_processing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o
+.PHONY : src/shader_processing.cpp.o
+
+src/shader_processing.i: src/shader_processing.cpp.i
+.PHONY : src/shader_processing.i
+
+# target to preprocess a source file
+src/shader_processing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.i
+.PHONY : src/shader_processing.cpp.i
+
+src/shader_processing.s: src/shader_processing.cpp.s
+.PHONY : src/shader_processing.s
+
+# target to generate assembly for a file
+src/shader_processing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.s
+.PHONY : src/shader_processing.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Text_Editor"
+	@echo "... src/initialization.o"
+	@echo "... src/initialization.i"
+	@echo "... src/initialization.s"
 	@echo "... src/input_processing.o"
 	@echo "... src/input_processing.i"
 	@echo "... src/input_processing.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/shader_processing.o"
+	@echo "... src/shader_processing.i"
+	@echo "... src/shader_processing.s"
 .PHONY : help
 
 

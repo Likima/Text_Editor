@@ -796,8 +796,7 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
   /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc \
-  ../src/glextloader.hpp
+  /usr/include/c++/11/bits/sstream.tcc
 
 CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing.cpp \
   /usr/include/stdc-predef.h \
@@ -990,8 +989,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
   /usr/include/GL/gl.h \
   /usr/include/GLFW/glfw3.h
 
-
-../src/glextloader.hpp:
 
 /usr/include/c++/11/sstream:
 

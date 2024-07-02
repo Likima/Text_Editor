@@ -17,41 +17,28 @@
 #include "input_processing.hpp"
 #include "initialization.hpp"
 #include "shader_processing.hpp"
-#include "glextloader.hpp"
 
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
+#define FONT_SIZE 20
+#define FONT_PATH "../Fonts/VictorMono-Regular.ttf"
+;
 struct Character {
     GLuint TextureID;
     glm::ivec2 Size;
     glm::ivec2 Bearing;
     GLuint Advance;
 };
-
 std::map<GLchar, Character> Characters;
 
 const char* VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char* FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
 
+std::string text = "";
+
+GLuint program = 0;
+
 unsigned int VAO, VBO;
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    switch(action) {
-        case(GLFW_PRESS): {
-            switch(key) {
-                case(GLFW_KEY_ESCAPE): {
-                    glfwSetWindowShouldClose(window, GL_TRUE);
-                }
-                break;
-                default:
-                    std::cout<<key<<std::endl;
-            }
-        }
-        break;
-    }
-}
-
-void char_callback(GLFWwindow* window, unsigned int codepoint) {
-    std::cout << "Character input: " << static_cast<char>(codepoint) << std::endl;
-}
 
 // Not too sure what this does. Fixes seg fault though!
 static void load_gl_extensions(void)
@@ -111,7 +98,34 @@ static void load_gl_extensions(void)
     }
 }
 
-bool loadFont(const char* fontPath) {
+void renderText(GLuint& s, std::string text, float x, float y, float scale, glm::vec3 color);
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    switch(action) {
+        case(GLFW_PRESS): {
+            switch(key) {
+                case(GLFW_KEY_ESCAPE): {
+                    glfwSetWindowShouldClose(window, GL_TRUE);
+                }
+                break;
+                default:
+                    std::cout<<key<<std::endl;
+                    renderText(program, std::string(1, static_cast<char>(key)), 15.0f, float(SCREEN_HEIGHT)-40.0f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+                    glfwSwapBuffers(window);
+                    glfwPollEvents();
+            }
+        }
+        break;
+    }
+}
+
+void char_callback(GLFWwindow* window, unsigned int codepoint) {
+    std::string character(1, static_cast<char>(codepoint));
+    std::cout << "Character input: " << character << " : " << std::endl;
+
+    text = text + character;
+}
+bool loadFont() {
     FT_Library ft;
     if (FT_Init_FreeType(&ft)) {
         std::cerr << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
@@ -119,11 +133,11 @@ bool loadFont(const char* fontPath) {
     }
 
     FT_Face face;
-    if (FT_New_Face(ft, fontPath, 0, &face)) {
+    if (FT_New_Face(ft, FONT_PATH, 0, &face)) {
         std::cerr << "ERROR::FREETYPE: Failed to load font" << std::endl;
         return false;
     }
-    FT_Set_Pixel_Sizes(face, 0, 48);
+    FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
 
     // disable byte-alignment restriction
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -242,16 +256,15 @@ int main() {
     if(!initGLEW) {
         std::cout << "Error Initializing GLEW" << std::endl;
     }
-    glfwSetKeyCallback(window, key_callback);
-    // Set character callback
-    glfwSetCharCallback(window, char_callback);
 
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
+    glEnable(GL_FRAMEBUFFER_SRGB);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     GLuint vert_shader = 0;
     GLuint frag_shader = 0;
+
     if(!compileShader(VERTEX_SHADER_PATH, GL_VERTEX_SHADER, &vert_shader)){
         std::cout << "Failure to compile vertex shader" << std::endl;
         return(-1);
@@ -260,11 +273,11 @@ int main() {
         std::cout << "Failure to compile frag shader " << std::endl;
         return(-1);
     }
-    GLuint program = 0;
     if(!createShaderProgram(vert_shader,frag_shader,&program)){
         std::cout << "Failure to link programs" << std::endl;
         return(-1);
     }
+
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(800), 0.0f, static_cast<float>(600));
     glUseProgram(program);
     GLuint mLocation = glGetUniformLocation(program, "projection");
@@ -278,7 +291,7 @@ int main() {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    loadFont("../Fonts/VictorMono-Regular.ttf");
+    loadFont();
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -290,21 +303,30 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);  
 
+    glfwSetKeyCallback(window, key_callback);
+    glfwSetCharCallback(window, char_callback);
 
     while (!glfwWindowShouldClose(window)) {
         // Render here
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
 
-        renderText(program, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+        renderText(program, text, 15.0f, float(SCREEN_HEIGHT)-40.0f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
+
+        // rendertext(program, title, x, y, ?, ?)
         // Swap front and back buffers
         glfwSwapBuffers(window);
         // Poll for and process events
         glfwPollEvents();
     }
+    // Cleanup
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(program);
 
     glfwDestroyWindow(window);
     glfwTerminate();

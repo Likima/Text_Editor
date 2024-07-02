@@ -800,7 +800,6 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o
  /usr/include/c++/11/bits/fstream.tcc
  /usr/include/c++/11/sstream
  /usr/include/c++/11/bits/sstream.tcc
- /home/brandon/Text_Editor/src/glextloader.hpp
 
 CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o
  /home/brandon/Text_Editor/src/shader_processing.cpp

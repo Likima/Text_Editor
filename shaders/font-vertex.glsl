@@ -1,10 +1,11 @@
-#version 330 core 
+#version 330 core
+layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>
+out vec2 TexCoords;
 
-void main() {
-    // Extract the x and y positions based on the vertex ID
-    float x = float(gl_VertexID & 1);       // 0 for even IDs, 1 for odd IDs
-    float y = float((gl_VertexID >> 1) & 1); // 0 for IDs 0,1, 1 for IDs 2,3
+uniform mat4 projection;
 
-    // Map x and y to the range [-0.5, 0.5]
-    gl_Position = vec4(x - 0.5, y - 0.5, 0.0, 1.0);
-}
+void main()
+{
+    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);
+    TexCoords = vertex.zw;
+}  

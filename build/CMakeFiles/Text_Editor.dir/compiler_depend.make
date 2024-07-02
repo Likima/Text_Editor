@@ -545,47 +545,6 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/GL/glu.h \
   /usr/include/GL/gl.h \
   /usr/include/GLFW/glfw3.h \
-  /usr/include/freetype2/ft2build.h \
-  /usr/include/freetype2/freetype/config/ftheader.h \
-  /usr/include/c++/11/map \
-  /usr/include/c++/11/bits/stl_tree.h \
-  /usr/include/c++/11/ext/aligned_buffer.h \
-  /usr/include/c++/11/bits/stl_map.h \
-  /usr/include/c++/11/tuple \
-  /usr/include/c++/11/utility \
-  /usr/include/c++/11/bits/stl_relops.h \
-  /usr/include/c++/11/array \
-  /usr/include/c++/11/bits/uses_allocator.h \
-  /usr/include/c++/11/bits/invoke.h \
-  /usr/include/c++/11/bits/stl_multimap.h \
-  /usr/include/c++/11/bits/erase_if.h \
-  /usr/include/freetype2/freetype/freetype.h \
-  /usr/include/freetype2/freetype/config/ftconfig.h \
-  /usr/include/freetype2/freetype/config/ftoption.h \
-  /usr/include/freetype2/freetype/config/ftstdlib.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
-  /usr/include/linux/limits.h \
-  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
-  /usr/include/string.h \
-  /usr/include/strings.h \
-  /usr/include/c++/11/stdlib.h \
-  /usr/include/setjmp.h \
-  /usr/include/freetype2/freetype/config/integer-types.h \
-  /usr/include/freetype2/freetype/config/public-macros.h \
-  /usr/include/freetype2/freetype/config/mac-support.h \
-  /usr/include/freetype2/freetype/fttypes.h \
-  /usr/include/freetype2/freetype/ftsystem.h \
-  /usr/include/freetype2/freetype/ftimage.h \
-  /usr/include/freetype2/freetype/fterrors.h \
-  /usr/include/freetype2/freetype/ftmoderr.h \
-  /usr/include/freetype2/freetype/fterrdef.h \
-  ../src/input_processing.hpp \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/c++/11/cmath \
@@ -604,6 +563,15 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/assert.h \
   /usr/include/glm/simd/platform.h \
   /usr/include/c++/11/climits \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
   /usr/include/c++/11/cfloat \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h \
   /usr/include/c++/11/limits \
@@ -738,6 +706,88 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
+  /usr/include/glm/gtc/matrix_transform.hpp \
+  /usr/include/glm/ext/matrix_projection.hpp \
+  /usr/include/glm/gtc/constants.hpp \
+  /usr/include/glm/ext/scalar_constants.hpp \
+  /usr/include/glm/ext/scalar_constants.inl \
+  /usr/include/glm/gtc/constants.inl \
+  /usr/include/glm/ext/matrix_projection.inl \
+  /usr/include/glm/ext/matrix_clip_space.hpp \
+  /usr/include/glm/ext/matrix_clip_space.inl \
+  /usr/include/glm/ext/matrix_transform.hpp \
+  /usr/include/glm/ext/matrix_transform.inl \
+  /usr/include/glm/gtc/matrix_transform.inl \
+  /usr/include/glm/gtc/type_ptr.hpp \
+  /usr/include/glm/gtc/quaternion.hpp \
+  /usr/include/glm/ext/vector_relational.hpp \
+  /usr/include/glm/ext/vector_relational.inl \
+  /usr/include/glm/detail/type_float.hpp \
+  /usr/include/glm/ext/quaternion_common.hpp \
+  /usr/include/glm/ext/quaternion_geometric.hpp \
+  /usr/include/glm/ext/quaternion_geometric.inl \
+  /usr/include/glm/ext/quaternion_common.inl \
+  /usr/include/glm/ext/quaternion_float.hpp \
+  /usr/include/glm/detail/type_quat.hpp \
+  /usr/include/glm/ext/quaternion_relational.hpp \
+  /usr/include/glm/ext/quaternion_relational.inl \
+  /usr/include/glm/detail/type_quat.inl \
+  /usr/include/glm/ext/quaternion_float_precision.hpp \
+  /usr/include/glm/ext/quaternion_double.hpp \
+  /usr/include/glm/ext/quaternion_double_precision.hpp \
+  /usr/include/glm/ext/quaternion_trigonometric.hpp \
+  /usr/include/glm/ext/quaternion_trigonometric.inl \
+  /usr/include/glm/ext/quaternion_transform.hpp \
+  /usr/include/glm/ext/quaternion_transform.inl \
+  /usr/include/glm/gtc/quaternion.inl \
+  /usr/include/glm/gtc/epsilon.hpp \
+  /usr/include/glm/detail/setup.hpp \
+  /usr/include/glm/gtc/epsilon.inl \
+  /usr/include/glm/gtc/vec1.hpp \
+  /usr/include/glm/ext/vector_bool1.hpp \
+  /usr/include/glm/ext/vector_bool1_precision.hpp \
+  /usr/include/glm/ext/vector_float1.hpp \
+  /usr/include/glm/ext/vector_float1_precision.hpp \
+  /usr/include/glm/ext/vector_double1.hpp \
+  /usr/include/glm/ext/vector_double1_precision.hpp \
+  /usr/include/glm/ext/vector_int1.hpp \
+  /usr/include/glm/ext/vector_int1_sized.hpp \
+  /usr/include/glm/ext/vector_uint1.hpp \
+  /usr/include/glm/ext/vector_uint1_sized.hpp \
+  /usr/include/c++/11/cstring \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/glm/gtc/type_ptr.inl \
+  /usr/include/freetype2/ft2build.h \
+  /usr/include/freetype2/freetype/config/ftheader.h \
+  /usr/include/c++/11/map \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/stl_map.h \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/stl_multimap.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/freetype2/freetype/freetype.h \
+  /usr/include/freetype2/freetype/config/ftconfig.h \
+  /usr/include/freetype2/freetype/config/ftoption.h \
+  /usr/include/freetype2/freetype/config/ftstdlib.h \
+  /usr/include/c++/11/stdlib.h \
+  /usr/include/setjmp.h \
+  /usr/include/freetype2/freetype/config/integer-types.h \
+  /usr/include/freetype2/freetype/config/public-macros.h \
+  /usr/include/freetype2/freetype/config/mac-support.h \
+  /usr/include/freetype2/freetype/fttypes.h \
+  /usr/include/freetype2/freetype/ftsystem.h \
+  /usr/include/freetype2/freetype/ftimage.h \
+  /usr/include/freetype2/freetype/fterrors.h \
+  /usr/include/freetype2/freetype/ftmoderr.h \
+  /usr/include/freetype2/freetype/fterrdef.h \
+  ../src/input_processing.hpp \
   ../src/initialization.hpp \
   ../src/shader_processing.hpp \
   /usr/include/c++/11/fstream \
@@ -951,6 +1001,78 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
+../src/input_processing.hpp:
+
+/usr/include/freetype2/freetype/ftmoderr.h:
+
+/usr/include/freetype2/freetype/ftsystem.h:
+
+/usr/include/freetype2/freetype/config/mac-support.h:
+
+/usr/include/freetype2/freetype/config/public-macros.h:
+
+/usr/include/freetype2/freetype/config/integer-types.h:
+
+/usr/include/setjmp.h:
+
+/usr/include/freetype2/freetype/config/ftstdlib.h:
+
+/usr/include/freetype2/freetype/config/ftoption.h:
+
+/usr/include/c++/11/bits/invoke.h:
+
+/usr/include/c++/11/bits/uses_allocator.h:
+
+/usr/include/c++/11/tuple:
+
+/usr/include/c++/11/bits/stl_map.h:
+
+/usr/include/c++/11/bits/stl_tree.h:
+
+/usr/include/c++/11/map:
+
+/usr/include/freetype2/freetype/config/ftheader.h:
+
+/usr/include/glm/ext/vector_uint1.hpp:
+
+/usr/include/glm/ext/vector_int1.hpp:
+
+/usr/include/glm/ext/vector_float1.hpp:
+
+/usr/include/glm/ext/vector_bool1_precision.hpp:
+
+/usr/include/glm/ext/vector_bool1.hpp:
+
+/usr/include/glm/gtc/epsilon.inl:
+
+/usr/include/glm/ext/quaternion_transform.inl:
+
+/usr/include/glm/ext/quaternion_trigonometric.inl:
+
+/usr/include/glm/ext/quaternion_trigonometric.hpp:
+
+/usr/include/glm/ext/quaternion_double.hpp:
+
+/usr/include/glm/ext/quaternion_relational.inl:
+
+/usr/include/glm/ext/quaternion_geometric.inl:
+
+/usr/include/c++/11/bits/stl_multimap.h:
+
+/usr/include/glm/ext/vector_relational.inl:
+
+/usr/include/glm/gtc/type_ptr.hpp:
+
+/usr/include/glm/ext/matrix_transform.hpp:
+
+/usr/include/glm/ext/matrix_projection.inl:
+
+/usr/include/glm/ext/scalar_constants.inl:
+
+/usr/include/glm/gtc/constants.hpp:
+
+/usr/include/glm/ext/matrix_projection.hpp:
+
 /usr/include/glm/integer.hpp:
 
 /usr/include/glm/detail/type_half.hpp:
@@ -964,6 +1086,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/glm/ext/matrix_float2x2.hpp:
 
 /usr/include/glm/ext/matrix_double2x2_precision.hpp:
+
+/usr/include/strings.h:
+
+/usr/include/glm/detail/compute_common.hpp:
 
 /usr/include/glm/detail/func_common.inl:
 
@@ -983,9 +1109,13 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/ext/matrix_float4x4.hpp:
 
+/usr/include/glm/ext/quaternion_common.inl:
+
 /usr/include/glm/ext/matrix_double4x4_precision.hpp:
 
 /usr/include/glm/detail/type_mat4x4.inl:
+
+/usr/include/glm/ext/quaternion_float.hpp:
 
 /usr/include/glm/mat4x4.hpp:
 
@@ -1001,11 +1131,15 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/detail/type_mat4x2.hpp:
 
+/usr/include/glm/gtc/type_ptr.inl:
+
 /usr/include/glm/ext/matrix_double4x2.hpp:
 
 /usr/include/glm/mat4x3.hpp:
 
 /usr/include/glm/mat4x2.hpp:
+
+/usr/include/glm/ext/quaternion_geometric.hpp:
 
 /usr/include/glm/ext/matrix_float3x4.hpp:
 
@@ -1020,6 +1154,8 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/glm/mat3x4.hpp:
 
 /usr/include/glm/ext/matrix_float3x3_precision.hpp:
+
+/usr/include/glm/ext/matrix_transform.inl:
 
 /usr/include/glm/ext/matrix_float3x3.hpp:
 
@@ -1039,6 +1175,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/ext/matrix_float2x4_precision.hpp:
 
+/usr/include/c++/11/array:
+
+/usr/include/glm/ext/matrix_float2x4.hpp:
+
 /usr/include/glm/detail/type_mat2x4.inl:
 
 /usr/include/glm/ext/matrix_double2x4.hpp:
@@ -1051,6 +1191,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/detail/type_mat2x2.inl:
 
+/usr/include/freetype2/freetype/fttypes.h:
+
+/usr/include/glm/detail/type_mat2x2.hpp:
+
 /usr/include/glm/ext/matrix_double2x2.hpp:
 
 /usr/include/glm/mat2x2.hpp:
@@ -1061,57 +1205,11 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/ext/vector_uint4.hpp:
 
-/usr/include/glm/ext/vector_int4.hpp:
-
-/usr/include/glm/ext/vector_double4_precision.hpp:
-
-/usr/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/usr/include/glm/ext/vector_double4.hpp:
-
-/usr/include/glm/ext/matrix_double2x4_precision.hpp:
-
-/usr/include/glm/vec4.hpp:
-
-/usr/include/glm/ext/vector_uint3_sized.hpp:
-
-/usr/include/glm/ext/vector_int3.hpp:
-
-/usr/include/glm/ext/vector_double3_precision.hpp:
-
-/usr/include/glm/ext/vector_double3.hpp:
-
-/usr/include/glm/ext/vector_float3_precision.hpp:
-
-/usr/include/glm/ext/vector_bool3_precision.hpp:
-
-/usr/include/glm/detail/type_vec3.inl:
-
-/usr/include/glm/vec3.hpp:
-
-/usr/include/glm/ext/vector_uint2.hpp:
-
-/usr/include/glm/ext/vector_int2_sized.hpp:
-
-/usr/include/glm/ext/vector_int2.hpp:
-
-/usr/include/glm/ext/vector_double2_precision.hpp:
-
-/usr/include/glm/ext/scalar_int_sized.hpp:
-
-/usr/include/c++/11/bits/stl_construct.h:
+/usr/include/glm/gtc/vec1.hpp:
 
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/glm/ext/vector_float4_precision.hpp:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/glm/detail/type_vec3.hpp:
-
-/usr/include/c++/11/backward/binders.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
@@ -1125,17 +1223,11 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/glm/detail/compute_common.hpp:
-
-/usr/include/strings.h:
-
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
+/usr/include/glm/detail/type_quat.hpp:
+
 /usr/include/c++/11/ext/new_allocator.h:
-
-/usr/include/glm/detail/type_vec4.inl:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/glm/detail/type_mat4x3.hpp:
 
@@ -1157,6 +1249,8 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/time.h:
 
+/usr/include/glm/gtc/quaternion.inl:
+
 /usr/include/pthread.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
@@ -1169,21 +1263,9 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
-/usr/include/glm/detail/type_vec4.hpp:
-
-/usr/include/locale.h:
-
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
-/usr/include/glm/detail/type_mat2x2.hpp:
-
-/usr/include/freetype2/freetype/fttypes.h:
-
 /usr/include/c++/11/bits/localefwd.h:
-
-/usr/include/freetype2/freetype/config/ftheader.h:
-
-../src/input_processing.hpp:
 
 /usr/include/glm/ext/matrix_double3x2_precision.hpp:
 
@@ -1192,8 +1274,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 ../src/shader_processing.cpp:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
-
-/usr/include/setjmp.h:
 
 /usr/include/c++/11/cctype:
 
@@ -1205,15 +1285,11 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
-/usr/include/freetype2/freetype/ftmoderr.h:
+/usr/include/c++/11/ext/alloc_traits.h:
 
 /usr/include/glm/ext/vector_uint2_sized.hpp:
 
-/usr/include/c++/11/ext/alloc_traits.h:
-
 /usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/usr/include/freetype2/freetype/config/public-macros.h:
 
 /usr/include/glm/mat3x3.hpp:
 
@@ -1225,6 +1301,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/ostream.tcc:
 
+/usr/include/glm/ext/quaternion_float_precision.hpp:
+
+/usr/include/glm/ext/vector_double3.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
 /usr/include/c++/11/bits/stl_iterator.h:
@@ -1235,11 +1315,11 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
 
+/usr/include/locale.h:
+
+/usr/include/glm/detail/type_vec4.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/c++/11/bits/stl_tree.h:
-
-/usr/include/c++/11/tuple:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
@@ -1253,8 +1333,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/exception_ptr.h:
 
-/usr/include/c++/11/bits/invoke.h:
-
 /usr/include/c++/11/cstdint:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
@@ -1267,13 +1345,21 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/detail/compute_vector_relational.hpp:
 
+/usr/include/glm/vec3.hpp:
+
+/usr/include/glm/ext/matrix_clip_space.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
+/usr/include/glm/gtc/epsilon.hpp:
 
 /usr/include/glm/ext/matrix_float2x2_precision.hpp:
 
 /usr/include/c++/11/bits/alloc_traits.h:
 
 /usr/include/stdc-predef.h:
+
+/usr/include/glm/ext/vector_uint1_sized.hpp:
 
 /usr/include/glm/ext/vector_float2.hpp:
 
@@ -1289,11 +1375,9 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
-/usr/include/freetype2/freetype/config/mac-support.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /usr/include/glm/ext/scalar_uint_sized.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /usr/include/c++/11/debug/assertions.h:
 
@@ -1301,17 +1385,21 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/include/freetype2/freetype/config/ftoption.h:
+/usr/include/c++/11/backward/binders.h:
+
+/usr/include/glm/detail/type_vec3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/GL/gl.h:
 
+/usr/include/freetype2/freetype/fterrdef.h:
+
+/usr/include/c++/11/ext/type_traits.h:
+
 /usr/include/c++/11/ext/numeric_traits.h:
 
 /usr/include/features.h:
-
-/usr/include/c++/11/bits/stl_multimap.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
@@ -1347,15 +1435,15 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/ostream:
 
+/usr/include/glm/ext/quaternion_transform.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
-/usr/include/glm/matrix.hpp:
+/usr/include/freetype2/freetype/fterrors.h:
 
-/usr/include/glm/ext/vector_bool3.hpp:
-
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/glm/ext/matrix_double2x3_precision.hpp:
 
@@ -1377,13 +1465,13 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/freetype2/freetype/ftsystem.h:
+/usr/include/glm/ext/vector_double1_precision.hpp:
 
-/usr/include/glm/ext/vector_float3.hpp:
+/usr/include/glm/ext/vector_int3.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+/usr/include/freetype2/freetype/freetype.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/include/glm/ext/vector_float4.hpp:
 
 /usr/include/c++/11/bits/stl_iterator_base_types.h:
 
@@ -1401,27 +1489,33 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/cstddef:
 
-/usr/include/c++/11/map:
-
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/glm/ext/matrix_double3x3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/freetype2/freetype/fterrors.h:
-
 /usr/include/c++/11/bits/basic_string.h:
 
 /usr/include/linux/limits.h:
 
+/usr/include/glm/ext/scalar_constants.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/glm/ext/vector_relational.hpp:
 
 /usr/include/glm/ext/vector_float2_precision.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+
+/usr/include/freetype2/freetype/ftimage.h:
+
+/usr/include/glm/detail/type_mat4x4.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
+
+/usr/include/c++/11/bits/exception_defines.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
@@ -1433,9 +1527,7 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/hash_bytes.h:
 
-/usr/include/glm/ext/vector_int4_sized.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+/usr/include/glm/gtc/quaternion.hpp:
 
 /usr/include/c++/11/bits/functexcept.h:
 
@@ -1463,6 +1555,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/ctype.h:
 
+/usr/include/c++/11/bits/stl_construct.h:
+
+/usr/include/glm/ext/scalar_int_sized.hpp:
+
 /usr/include/c++/11/bits/cpp_type_traits.h:
 
 /usr/include/c++/11/bits/stl_iterator_base_funcs.h:
@@ -1475,13 +1571,23 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
+/usr/include/c++/11/ext/aligned_buffer.h:
+
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/include/c++/11/ext/aligned_buffer.h:
+/usr/include/c++/11/bits/erase_if.h:
+
+/usr/include/c++/11/bits/ptr_traits.h:
+
+/usr/include/stdint.h:
+
+/usr/include/endian.h:
 
 /usr/include/glm/ext/vector_double2.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/glm/gtc/constants.inl:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
@@ -1489,11 +1595,15 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 ../src/input_processing.cpp:
 
+/usr/include/glm/ext/vector_bool3_precision.hpp:
+
 /usr/include/glm/ext/vector_bool4_precision.hpp:
 
 /usr/include/alloca.h:
 
 /usr/include/glm/ext/vector_bool2.hpp:
+
+/usr/include/glm/ext/vector_double1.hpp:
 
 /usr/include/c++/11/bits/std_abs.h:
 
@@ -1502,6 +1612,8 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/c++/11/cstdio:
 
 /usr/include/stdio.h:
+
+/usr/include/glm/ext/vector_float1_precision.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
@@ -1535,6 +1647,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/basic_string.tcc:
 
+/usr/include/glm/ext/quaternion_common.hpp:
+
+/usr/include/glm/ext/vector_double3_precision.hpp:
+
 /usr/include/c++/11/bits/locale_classes.tcc:
 
 /usr/include/glm/detail/_vectorize.hpp:
@@ -1547,15 +1663,19 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/system_error:
 
-/usr/include/c++/11/ios:
-
 /usr/include/c++/11/utility:
+
+/usr/include/c++/11/ios:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
 
 /usr/include/glm/ext/matrix_float3x2_precision.hpp:
 
 /usr/include/c++/11/stdexcept:
+
+/usr/include/string.h:
+
+/usr/include/c++/11/bits/streambuf.tcc:
 
 /usr/include/c++/11/bits/basic_ios.h:
 
@@ -1565,6 +1685,8 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/cwctype:
 
+/usr/include/glm/detail/type_float.hpp:
+
 /usr/include/glm/vector_relational.hpp:
 
 /usr/include/c++/11/bits/streambuf_iterator.h:
@@ -1573,9 +1695,17 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 
+/usr/include/glm/ext/quaternion_double_precision.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
 /usr/include/c++/11/bits/locale_facets.tcc:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/glm/ext/vector_float4_precision.hpp:
+
+/usr/include/glm/ext/vector_double4_precision.hpp:
 
 /usr/include/c++/11/bits/codecvt.h:
 
@@ -1587,79 +1717,15 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/istream.tcc:
 
-../src/main.cpp:
-
-/usr/include/c++/11/bits/stl_map.h:
-
-/usr/include/glm/ext/vector_uint3.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/glm/detail/type_mat2x3.inl:
-
-/usr/include/glm/detail/type_vec2.hpp:
+/usr/include/c++/11/bits/stl_relops.h:
 
 /usr/include/limits.h:
 
-/usr/include/c++/11/bits/stl_relops.h:
+/usr/include/glm/ext/vector_int1_sized.hpp:
 
-/usr/include/c++/11/debug/debug.h:
+../src/main.cpp:
 
-/usr/include/features-time64.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
-
-/usr/include/glm/ext/matrix_float2x4.hpp:
-
-/usr/include/c++/11/array:
-
-/usr/include/c++/11/bits/sstream.tcc:
-
-/usr/include/c++/11/new:
-
-/usr/include/c++/11/climits:
-
-/usr/include/c++/11/bits/uses_allocator.h:
-
-/usr/include/c++/11/bits/ptr_traits.h:
-
-/usr/include/stdint.h:
-
-/usr/include/endian.h:
-
-/usr/include/c++/11/bits/erase_if.h:
-
-/usr/include/glm/ext/vector_float4.hpp:
-
-/usr/include/freetype2/freetype/freetype.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
-
-/usr/include/freetype2/freetype/config/ftstdlib.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
-
-/usr/include/c++/11/string:
-
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-
-/usr/include/c++/11/bits/streambuf.tcc:
-
-/usr/include/string.h:
-
-/usr/include/freetype2/freetype/config/integer-types.h:
-
-/usr/include/glm/detail/type_mat4x4.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
-
-/usr/include/c++/11/bits/exception_defines.h:
-
-/usr/include/freetype2/freetype/ftimage.h:
-
-/usr/include/c++/11/ext/type_traits.h:
-
-/usr/include/freetype2/freetype/fterrdef.h:
+/usr/include/c++/11/cstring:
 
 /usr/include/glm/common.hpp:
 
@@ -1671,9 +1737,9 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/cassert:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
 /usr/include/freetype2/ft2build.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
@@ -1689,9 +1755,43 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
+/usr/include/glm/detail/type_mat2x3.inl:
+
+/usr/include/glm/detail/type_vec2.hpp:
+
+/usr/include/glm/ext/matrix_clip_space.inl:
+
 /usr/include/glm/detail/setup.hpp:
 
+/usr/include/glm/gtc/matrix_transform.hpp:
+
 /usr/include/glm/simd/platform.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
+
+/usr/include/c++/11/new:
+
+/usr/include/c++/11/climits:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
+
+/usr/include/glm/detail/type_quat.inl:
+
+/usr/include/c++/11/debug/debug.h:
+
+/usr/include/features-time64.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/glm/ext/vector_uint3.hpp:
+
+/usr/include/c++/11/string:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
@@ -1705,6 +1805,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/limits:
 
+/usr/include/glm/ext/vector_float3_precision.hpp:
+
+/usr/include/glm/gtc/matrix_transform.inl:
+
 /usr/include/glm/detail/type_mat2x3.hpp:
 
 /usr/include/glm/detail/qualifier.hpp:
@@ -1712,3 +1816,47 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/c++/11/stdlib.h:
 
 /usr/include/glm/ext/vector_bool2_precision.hpp:
+
+/usr/include/glm/ext/vector_double2_precision.hpp:
+
+/usr/include/glm/ext/vector_int2.hpp:
+
+/usr/include/glm/ext/vector_int2_sized.hpp:
+
+/usr/include/glm/ext/vector_uint2.hpp:
+
+/usr/include/glm/matrix.hpp:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/glm/ext/vector_bool3.hpp:
+
+/usr/include/glm/ext/quaternion_relational.hpp:
+
+/usr/include/glm/ext/matrix_double2x4_precision.hpp:
+
+/usr/include/glm/vec4.hpp:
+
+/usr/include/glm/detail/type_vec3.inl:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/glm/ext/vector_float3.hpp:
+
+/usr/include/glm/ext/vector_uint3_sized.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/glm/detail/type_vec4.inl:
+
+/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/usr/include/glm/ext/vector_double4.hpp:
+
+/usr/include/glm/ext/vector_int4.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+
+/usr/include/glm/ext/vector_int4_sized.hpp:

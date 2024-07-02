@@ -5,6 +5,11 @@
 #define GLFW_INCLUDE_GLEXT
 #include <GLFW/glfw3.h>
 
+// GLM headers
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp> // For glm::ortho
+#include <glm/gtc/type_ptr.hpp> // For glm::value_ptr
+
 #include <ft2build.h>
 #include <map>
 #include FT_FREETYPE_H  
@@ -25,6 +30,8 @@ std::map<GLchar, Character> Characters;
 
 const char* VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char* FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
+
+unsigned int VAO, VBO;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     switch(action) {
@@ -82,6 +89,9 @@ static void load_gl_extensions(void)
     glUniform1i               = (PFNGLUNIFORM1IPROC) glfwGetProcAddress("glUniform1i");
     glDrawBuffers             = (PFNGLDRAWBUFFERSPROC) glfwGetProcAddress("glDrawBuffers");
     glUniform4f               = (PFNGLUNIFORM4FPROC) glfwGetProcAddress("glUniform4f");
+    glUniform3f               = (PFNGLUNIFORM3FPROC) glfwGetProcAddress("glUniform3f");
+    glActiveTexture           = (PFNGLACTIVETEXTUREPROC) glfwGetProcAddress("glActiveTexture");
+    glUniformMatrix4fv        = (PFNGLUNIFORMMATRIX4FVPROC) glfwGetProcAddress("glUniformMatrix4fv");
 #ifdef _WIN32
     glActiveTexture           = (PFNGLACTIVETEXTUREPROC) glfwGetProcAddress("glActiveTexture");
 #endif // _WIN32
@@ -115,14 +125,19 @@ bool loadFont(const char* fontPath) {
     }
     FT_Set_Pixel_Sizes(face, 0, 48);
 
+    // disable byte-alignment restriction
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (GLubyte c = 0; c < 128; c++) {
-        if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-            std::cerr << "ERROR::FREETYPE: Failed to load Glyph" << std::endl;
+    // load first 128 characters of ASCII set
+    for (unsigned char c = 0; c < 128; c++)
+    {
+        // Load character glyph 
+        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        {
+            std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
             continue;
         }
-
-        GLuint texture;
+        // generate texture
+        unsigned int texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(
@@ -136,30 +151,67 @@ bool loadFont(const char* fontPath) {
             GL_UNSIGNED_BYTE,
             face->glyph->bitmap.buffer
         );
+        // set texture options
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+        // now store character for later use
         Character character = {
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            static_cast<GLuint>(face->glyph->advance.x)
+            static_cast<unsigned int>(face->glyph->advance.x)
         };
-        Characters.insert(std::pair<GLchar, Character>(c, character));
+        Characters.insert(std::pair<char, Character>(c, character));
     }
     glBindTexture(GL_TEXTURE_2D, 0);
-
+    // destroy FreeType once we're finished
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 
     return true;
 }
 
-int main() {
-    loadFont("../Fonts/VictorMono-Regular.ttf");
 
+void renderText(GLuint& s, std::string text, float x, float y, float scale, glm::vec3 color) {
+    glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(VAO);
+
+    for (auto c = text.begin(); c != text.end(); c++) {
+        Character ch = Characters[*c];
+
+        float xpos = x + ch.Bearing.x * scale;
+        float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+        float w = ch.Size.x * scale;
+        float h = ch.Size.y * scale;
+
+        float vertices[6][4] = {
+            { xpos, ypos + h, 0.0f, 0.0f },
+            { xpos, ypos, 0.0f, 1.0f },
+            { xpos + w, ypos, 1.0f, 1.0f },
+
+            { xpos, ypos + h, 0.0f, 0.0f },
+            { xpos + w, ypos, 1.0f, 1.0f },
+            { xpos + w, ypos + h, 1.0f, 0.0f }
+        };
+
+        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+        glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        x += (ch.Advance >> 6) * scale;
+    }
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+int main() {
     glfwSetErrorCallback(error_callback);
 
     // Creation of window
@@ -194,6 +246,9 @@ int main() {
     // Set character callback
     glfwSetCharCallback(window, char_callback);
 
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     GLuint vert_shader = 0;
     GLuint frag_shader = 0;
@@ -210,42 +265,48 @@ int main() {
         std::cout << "Failure to link programs" << std::endl;
         return(-1);
     }
-
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(800), 0.0f, static_cast<float>(600));
     glUseProgram(program);
-
+    GLuint mLocation = glGetUniformLocation(program, "projection");
+    if (mLocation == -1) {
+        std::cerr << "Failed to find uniform location for 'projection'" << std::endl;
+        return -1;
+    }
+    glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
+    
     GLuint vao = 0;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
+    loadFont("../Fonts/VictorMono-Regular.ttf");
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);  
+
+
     while (!glfwWindowShouldClose(window)) {
         // Render here
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+
+        //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+
+        renderText(program, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+
         // Swap front and back buffers
         glfwSwapBuffers(window);
         // Poll for and process events
         glfwPollEvents();
     }
-    //}
 
     glfwDestroyWindow(window);
     glfwTerminate();
-    //bool quit = false;
-    //while(!quit){
-    //    SDL_Event event = {0};
-    //    while(SDL_PollEvent(&event)){
-    //        switch(event.type){
-    //            case(SDL_QUIT): {
-    //                quit = true;
-    //            }
-    //            break;
-    //            case(SDL_TEXTINPUT): { // Retrieve text from user.
-    //                std::cout<<event.text.text<<std::endl;
-    //            }
-    //            break;
-    //        }
-    //    }
-    //}
     return 0;
 }

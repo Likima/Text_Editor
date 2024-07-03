@@ -30,6 +30,7 @@ struct Character
     glm::ivec2 Bearing;
     GLuint Advance;
 };
+
 std::map<GLchar, Character> Characters;
 
 struct Editor
@@ -50,8 +51,6 @@ const char *VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char *FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
 const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
-
-std::string text = "";
 
 GLuint program = 0;
 
@@ -121,7 +120,7 @@ static void load_gl_extensions(void)
     }
 }
 
-void renderText(GLuint &s, std::string text, float x, float y, float scale, glm::vec3 color);
+void renderText(GLuint &s, std::vector<std::string> lines, float x, float y, float scale, glm::vec3 color);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
@@ -135,6 +134,14 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
     glUseProgram(program);
     glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+}
+
+void push_to_editor(std::string s)
+{
+    if (e.lines[e.cursor_y].empty())
+        e.lines[e.cursor_y] = s;
+    else
+        e.lines[e.cursor_y] = e.lines[e.cursor_y] + s;
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -155,6 +162,12 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             e.cursor_y++;
             e.lines.push_back("");
         }
+        break;
+        case (GLFW_KEY_TAB):
+        {
+            push_to_editor("   ");
+        }
+        break;
         default:
             std::cout << key << std::endl;
         }
@@ -167,10 +180,7 @@ void char_callback(GLFWwindow *window, unsigned int codepoint)
 {
     std::string character(1, static_cast<char>(codepoint));
     std::cout << "Character input: " << character << " : " << std::endl;
-    if (e.lines[e.cursor_y].empty())
-        e.lines[e.cursor_y] = character;
-    else
-        e.lines[e.cursor_y] = e.lines[e.cursor_y] + character;
+    push_to_editor(character);
 }
 bool loadFont()
 {

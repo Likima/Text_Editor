@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/brandon/Text_Editor/build",
+  "command": "/usr/bin/c++  -I/home/brandon/Text_Editor/include -isystem /usr/include/freetype2 -isystem /usr/include/SDL2 -std=gnu++11 -o CMakeFiles/Text_Editor.dir/src/initialization.cpp.o -c /home/brandon/Text_Editor/src/initialization.cpp",
+  "file": "/home/brandon/Text_Editor/src/initialization.cpp"
+},
+{
+  "directory": "/home/brandon/Text_Editor/build",
+  "command": "/usr/bin/c++  -I/home/brandon/Text_Editor/include -isystem /usr/include/freetype2 -isystem /usr/include/SDL2 -std=gnu++11 -o CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o -c /home/brandon/Text_Editor/src/input_processing.cpp",
+  "file": "/home/brandon/Text_Editor/src/input_processing.cpp"
+},
+{
+  "directory": "/home/brandon/Text_Editor/build",
+  "command": "/usr/bin/c++  -I/home/brandon/Text_Editor/include -isystem /usr/include/freetype2 -isystem /usr/include/SDL2 -std=gnu++11 -o CMakeFiles/Text_Editor.dir/src/main.cpp.o -c /home/brandon/Text_Editor/src/main.cpp",
+  "file": "/home/brandon/Text_Editor/src/main.cpp"
+},
+{
+  "directory": "/home/brandon/Text_Editor/build",
+  "command": "/usr/bin/c++  -I/home/brandon/Text_Editor/include -isystem /usr/include/freetype2 -isystem /usr/include/SDL2 -std=gnu++11 -o CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o -c /home/brandon/Text_Editor/src/shader_processing.cpp",
+  "file": "/home/brandon/Text_Editor/src/shader_processing.cpp"
+}
+]

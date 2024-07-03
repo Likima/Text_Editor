@@ -540,6 +540,11 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
   /usr/include/GL/glew.h \
   /usr/include/c++/11/cstddef \
   /usr/include/GL/glu.h \
@@ -1184,8 +1189,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/ext/matrix_float2x3.hpp:
 
-/usr/include/glm/ext/matrix_double2x3.hpp:
-
 /usr/include/glm/detail/type_mat2x2.inl:
 
 /usr/include/freetype2/freetype/fttypes.h:
@@ -1202,11 +1205,23 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/glm/ext/vector_uint4.hpp:
 
+/usr/include/glm/ext/vector_int4.hpp:
+
+/usr/include/glm/ext/vector_double4_precision.hpp:
+
+/usr/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/usr/include/glm/ext/vector_double4.hpp:
+
 /usr/include/glm/gtc/vec1.hpp:
 
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/glm/ext/vector_float4_precision.hpp:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
@@ -1229,10 +1244,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/glm/detail/type_mat4x3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -1484,8 +1495,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/range_access.h:
 
-/usr/include/c++/11/cstddef:
-
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/glm/ext/matrix_double3x3.hpp:
@@ -1523,6 +1532,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/c++/11/bits/move.h:
 
 /usr/include/c++/11/bits/hash_bytes.h:
+
+/usr/include/glm/ext/vector_int4_sized.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
 /usr/include/glm/gtc/quaternion.hpp:
 
@@ -1660,6 +1673,10 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/system_error:
 
+/usr/include/c++/11/cstddef:
+
+/usr/include/c++/11/bits/stl_vector.h:
+
 /usr/include/c++/11/utility:
 
 /usr/include/c++/11/ios:
@@ -1698,12 +1715,6 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 
 /usr/include/c++/11/bits/locale_facets.tcc:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/glm/ext/vector_float4_precision.hpp:
-
-/usr/include/glm/ext/vector_double4_precision.hpp:
-
 /usr/include/c++/11/bits/codecvt.h:
 
 /usr/include/c++/11/bits/basic_ios.tcc:
@@ -1721,6 +1732,20 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/glm/ext/vector_int1_sized.hpp:
 
 ../src/main.cpp:
+
+/usr/include/c++/11/vector:
+
+/usr/include/c++/11/bits/stl_uninitialized.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/c++/11/bits/stl_bvector.h:
+
+/usr/include/glm/ext/matrix_double2x3.hpp:
+
+/usr/include/c++/11/bits/vector.tcc:
 
 /usr/include/c++/11/cstring:
 
@@ -1847,13 +1872,3 @@ CMakeFiles/Text_Editor.dir/src/shader_processing.cpp.o: ../src/shader_processing
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/glm/detail/type_vec4.inl:
-
-/usr/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/usr/include/glm/ext/vector_double4.hpp:
-
-/usr/include/glm/ext/vector_int4.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
-
-/usr/include/glm/ext/vector_int4_sized.hpp:

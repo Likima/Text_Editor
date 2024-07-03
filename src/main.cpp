@@ -18,9 +18,7 @@
 #include "initialization.hpp"
 #include "shader_processing.hpp"
 
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 800
-#define FONT_SIZE 20
+#define FONT_SIZE 15
 #define FONT_PATH "../Fonts/VictorMono-Regular.ttf"
 ;
 struct Character {
@@ -31,8 +29,13 @@ struct Character {
 };
 std::map<GLchar, Character> Characters;
 
+int SCREEN_HEIGHT = 600;
+int SCREEN_WIDTH = 800;
+
 const char* VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char* FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
+const float x_Padding = 15.0f;
+const float y_Padding = FONT_SIZE + 15.0f;
 
 std::string text = "";
 
@@ -100,6 +103,17 @@ static void load_gl_extensions(void)
 
 void renderText(GLuint& s, std::string text, float x, float y, float scale, glm::vec3 color);
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    std::cout<<"HERE"<<std::endl;
+    // Adjust the viewport when the window is resized
+    glViewport(0, 0, width, height);
+    
+    // Update the projection matrix
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
+    glUseProgram(program);
+    glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     switch(action) {
         case(GLFW_PRESS): {
@@ -110,9 +124,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                 break;
                 default:
                     std::cout<<key<<std::endl;
-                    renderText(program, std::string(1, static_cast<char>(key)), 15.0f, float(SCREEN_HEIGHT)-40.0f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-                    glfwSwapBuffers(window);
-                    glfwPollEvents();
             }
         }
         break;
@@ -237,6 +248,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_DECORATED, false);
 
     GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AHHHH", nullptr, nullptr);
     if (!window) {
@@ -250,6 +262,7 @@ int main() {
     printf("OpenGL %d.%d\n", gl_ver_major, gl_ver_minor);
 
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     load_gl_extensions();
 
@@ -314,16 +327,14 @@ int main() {
 
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
 
-        renderText(program, text, 15.0f, float(SCREEN_HEIGHT)-40.0f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        renderText(program, text, x_Padding, float(SCREEN_HEIGHT)-y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 
-        // rendertext(program, title, x, y, ?, ?)
-        // Swap front and back buffers
         glfwSwapBuffers(window);
-        // Poll for and process events
         glfwPollEvents();
     }
     // Cleanup
+    // TO DO : declare these in the function that prevents seg faults.
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(program);

@@ -41,7 +41,6 @@ const float y_Padding = FONT_SIZE + 15.0f;
 int main()
 {
     glfwSetErrorCallback(error_callback);
-
     // Creation of window
     if (!glfwInit())
     {
@@ -52,7 +51,8 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // glfwWindowHint(GLFW_DECORATED, false);
+    // glfwWindowHint(GLFW_DECORATED, false); // <--- For Removing window border. Deal with in the future?
+    glfwWindowHint(GLFW_FLOATING, true);
 
     GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Text Editor", nullptr, nullptr);
     if (!window)
@@ -137,14 +137,12 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
-
+        renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
         renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
     // Cleanup
-    // TO DO : declare these in the function that prevents seg faults.
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(program);

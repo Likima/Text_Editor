@@ -20,7 +20,7 @@ struct Editor
 
 extern Editor e;
 
-#define FONT_SIZE 15
+#define FONT_SIZE 20
 #define FONT_PATH "../Fonts/VictorMono-Regular.ttf"
 ;
 struct Character
@@ -82,6 +82,9 @@ static void load_gl_extensions(void)
     glDeleteVertexArrays = (PFNGLDELETEVERTEXARRAYSPROC)glfwGetProcAddress("glDeleteVertexArrays");
     glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)glfwGetProcAddress("glDeleteBuffers");
     glDeleteProgram = (PFNGLDELETEPROGRAMPROC)glfwGetProcAddress("glDeleteProgram");
+    glBufferSubData = (PFNGLBUFFERSUBDATAPROC)glfwGetProcAddress("glBufferSubData");
+    glUniform3fv = (PFNGLUNIFORM3FVPROC)glfwGetProcAddress("glUniform3fv");
+    glDrawArraysEXT = (PFNGLDRAWARRAYSEXTPROC)glfwGetProcAddress("glDrawArraysEXT");
 #ifdef _WIN32
     glActiveTexture = (PFNGLACTIVETEXTUREPROC)glfwGetProcAddress("glActiveTexture");
 #endif // _WIN32

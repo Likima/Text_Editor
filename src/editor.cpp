@@ -7,6 +7,7 @@ void push_to_editor(std::string s)
         e.lines[e.cursor_y] = s;
     else
         e.lines[e.cursor_y] = e.lines[e.cursor_y] + s;
+    e.cursor_x++;
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -25,6 +26,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_ENTER):
         {
             e.cursor_y++;
+            e.cursor_x = 0;
             e.lines.push_back("");
         }
         break;
@@ -33,6 +35,36 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             push_to_editor("   ");
         }
         break;
+        case (GLFW_KEY_UP):
+        {
+            if(e.cursor_y > 0) {
+                if(e.cursor_x > e.lines[e.cursor_y - 1].length())
+                    e.cursor_x = e.lines[e.cursor_y - 1].length();
+                e.cursor_y--;
+            }
+        }
+        break;
+        case (GLFW_KEY_DOWN):
+        {
+            if(e.cursor_y < e.lines.size() - 1) {
+                if(e.cursor_x > e.lines[e.cursor_y + 1].length())
+                    e.cursor_x = e.lines[e.cursor_y + 1].length();
+                e.cursor_y++;
+            }
+        }
+        break;
+        case (GLFW_KEY_LEFT):
+        {
+            if (e.cursor_x > 0) {
+                e.cursor_x--;
+            }
+        }
+        break;
+        case (GLFW_KEY_RIGHT):
+        {
+            if (e.cursor_x < e.lines[e.cursor_y].length() - 1)
+                e.cursor_x++;
+        }
         default:
             std::cout << key << std::endl;
         }
@@ -103,4 +135,40 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
+{
+    GLchar u_line = '_';
+    Character ch = Characters[u_line];
+    glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(VAO);
+
+    float xpos = x + (ch.Bearing.x * scale);
+    for(int i = 0; i < e.cursor_x; i++) {
+        xpos += (ch.Advance >> 6) * scale;
+    }
+    float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (FONT_SIZE * scale * (e.cursor_y)); // Adjust y position    
+
+    // Define the vertices of the cursor
+    float w = ch.Size.x * scale;
+    float h = ch.Size.y * scale;
+
+    float vertices[6][4] = {
+        {xpos, ypos + h, 0.0f, 0.0f},
+        {xpos, ypos, 0.0f, 1.0f},
+        {xpos + w, ypos, 1.0f, 1.0f},
+        {xpos, ypos + h, 0.0f, 0.0f},
+        {xpos + w, ypos, 1.0f, 1.0f},
+        {xpos + w, ypos + h, 1.0f, 0.0f}};
+
+    glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glBindVertexArray(0);
 }

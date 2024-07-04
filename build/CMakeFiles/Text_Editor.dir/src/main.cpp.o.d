@@ -352,11 +352,12 @@ CMakeFiles/Text_Editor.dir/src/main.cpp.o: \
  /usr/include/freetype2/freetype/fterrors.h \
  /usr/include/freetype2/freetype/ftmoderr.h \
  /usr/include/freetype2/freetype/fterrdef.h \
- /home/brandon/Text_Editor/src/input_processing.hpp \
+ /home/brandon/Text_Editor/src/globals.hpp \
  /home/brandon/Text_Editor/src/initialization.hpp \
  /home/brandon/Text_Editor/src/shader_processing.hpp \
  /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc
+ /usr/include/c++/11/bits/sstream.tcc \
+ /home/brandon/Text_Editor/src/editor.hpp

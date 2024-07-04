@@ -129,6 +129,30 @@ Text_Editor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/build
 .PHONY : Text_Editor/fast
 
+src/editor.o: src/editor.cpp.o
+.PHONY : src/editor.o
+
+# target to build an object file
+src/editor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/editor.cpp.o
+.PHONY : src/editor.cpp.o
+
+src/editor.i: src/editor.cpp.i
+.PHONY : src/editor.i
+
+# target to preprocess a source file
+src/editor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/editor.cpp.i
+.PHONY : src/editor.cpp.i
+
+src/editor.s: src/editor.cpp.s
+.PHONY : src/editor.s
+
+# target to generate assembly for a file
+src/editor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/editor.cpp.s
+.PHONY : src/editor.cpp.s
+
 src/initialization.o: src/initialization.cpp.o
 .PHONY : src/initialization.o
 
@@ -152,30 +176,6 @@ src/initialization.s: src/initialization.cpp.s
 src/initialization.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/initialization.cpp.s
 .PHONY : src/initialization.cpp.s
-
-src/input_processing.o: src/input_processing.cpp.o
-.PHONY : src/input_processing.o
-
-# target to build an object file
-src/input_processing.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.o
-.PHONY : src/input_processing.cpp.o
-
-src/input_processing.i: src/input_processing.cpp.i
-.PHONY : src/input_processing.i
-
-# target to preprocess a source file
-src/input_processing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.i
-.PHONY : src/input_processing.cpp.i
-
-src/input_processing.s: src/input_processing.cpp.s
-.PHONY : src/input_processing.s
-
-# target to generate assembly for a file
-src/input_processing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Text_Editor.dir/build.make CMakeFiles/Text_Editor.dir/src/input_processing.cpp.s
-.PHONY : src/input_processing.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -234,12 +234,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Text_Editor"
+	@echo "... src/editor.o"
+	@echo "... src/editor.i"
+	@echo "... src/editor.s"
 	@echo "... src/initialization.o"
 	@echo "... src/initialization.i"
 	@echo "... src/initialization.s"
-	@echo "... src/input_processing.o"
-	@echo "... src/input_processing.i"
-	@echo "... src/input_processing.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -74,7 +74,6 @@ bool compileShader(const char* filePath, GLenum type, GLuint* shader) {
         std::cerr << "Failed to read file: " << filePath << std::endl;
         return false;
     }
-    std::cout << "Shader file contents:\n" << slurped_file << std::endl;
 
     bool compiled = compileShaderFromSource(slurped_file, type, shader);
     if (!compiled) {

@@ -1,19 +1,25 @@
 #include "editor.hpp"
 #include "globals.hpp"
 
+bool CTRL_PRESSED = false;
+
 void push_to_editor(std::string s)
 {
     if (e.lines[e.cursor_y].empty())
         e.lines[e.cursor_y] = s;
     else
-        e.lines[e.cursor_y] = e.lines[e.cursor_y] + s;
-    e.cursor_x++;
+        e.lines[e.cursor_y].insert(e.cursor_x, s);
+    e.cursor_x += s.length();
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     switch (action)
     {
+    case (GLFW_RELEASE):
+    {
+        CTRL_PRESSED = false;
+    }
     case (GLFW_PRESS):
     {
         switch (key)
@@ -65,19 +71,44 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             if (e.cursor_x < e.lines[e.cursor_y].length() - 1)
                 e.cursor_x++;
         }
+        break;
+        case (GLFW_KEY_LEFT_CONTROL):
+        case (GLFW_KEY_RIGHT_CONTROL): {
+            CTRL_PRESSED = true;
+            std::cout<<"CTRL PRESSED"<<std::endl;
+        }
+        break;
         default:
             std::cout << key << std::endl;
         }
     }
     break;
     }
+    if(CTRL_PRESSED && action == GLFW_PRESS) {
+        if(key == GLFW_KEY_S)
+            save_to_file();
+    }
+}
+
+void save_to_file(){
+    std::cout<<"HELLOOOOO"<<std::endl;
 }
 
 void char_callback(GLFWwindow *window, unsigned int codepoint)
 {
     std::string character(1, static_cast<char>(codepoint));
-    std::cout << "Character input: " << character << " : " << std::endl;
-    push_to_editor(character);
+    switch(CTRL_PRESSED) {
+        case(false): {           
+            // std::cout << "Character input: " << character << " : " << std::endl;
+            push_to_editor(character);
+        }
+        break;
+        default: {
+            if(character == "s") {
+                save_to_file();
+            }
+        }
+    }   
 }
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)

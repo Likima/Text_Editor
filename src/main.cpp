@@ -38,8 +38,13 @@ const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
 //----
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc > 2) 
+        save_file = argv[1];
+    
+
+    // Rest of the code...
     glfwSetErrorCallback(error_callback);
     // Creation of window
     if (!glfwInit())

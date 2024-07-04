@@ -36,6 +36,8 @@ extern std::map<GLchar, Character> Characters;
 extern int SCREEN_HEIGHT;
 extern int SCREEN_WIDTH;
 
+extern std::string save_file;
+
 extern GLuint program;
  
 extern unsigned int VAO, VBO;

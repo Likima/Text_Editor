@@ -88,6 +88,13 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
                 e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
                 e.cursor_x--;
             }
+            if(e.cursor_x == 0 && e.cursor_y > 0) {
+                int prev_line_length = e.lines[e.cursor_y - 1].length();
+                e.lines[e.cursor_y - 1] += e.lines[e.cursor_y];
+                e.lines.erase(e.lines.begin() + e.cursor_y);
+                e.cursor_y--;
+                e.cursor_x = prev_line_length;
+            }
         }
         break;
         default:
@@ -130,13 +137,27 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
                 e.cursor_x++;
         }
         break;
+        case (GLFW_KEY_BACKSPACE): {
+            if(e.cursor_x > 0) {
+                e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                e.cursor_x--;
+            }
+        }
+        break;
         }
     }
     break;
     }
-    if(CTRL_PRESSED && action == GLFW_PRESS) {
-        if(key == GLFW_KEY_S)
+    if(CTRL_PRESSED && action == GLFW_PRESS || action == GLFW_REPEAT) {
+        if (key == GLFW_KEY_S)
             save_to_file();
+        else if (key == GLFW_KEY_BACKSPACE) {
+            // Delete to the nearest space or bracket
+            while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) && e.lines[e.cursor_y][e.cursor_x - 1] != '(' && e.lines[e.cursor_y][e.cursor_x - 1] != '[' && e.lines[e.cursor_y][e.cursor_x - 1] != '{') {
+                e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                e.cursor_x--;
+            }
+        }
     }
 }
 

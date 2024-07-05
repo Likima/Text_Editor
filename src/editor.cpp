@@ -336,6 +336,26 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void updateProjection(GLuint program, int xpos, int ypos)
+{
+    
+    float offsetX = xpos - SCREEN_WIDTH / 2.0f;
+    float offsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
+
+    glm::mat4 projection = glm::ortho(
+        offsetX, offsetX + static_cast<float>(SCREEN_WIDTH),
+        offsetY, offsetY + static_cast<float>(SCREEN_HEIGHT));
+
+    glUseProgram(program);
+    GLuint mLocation = glGetUniformLocation(program, "projection");
+    if (mLocation == -1)
+    {
+        std::cerr << "Failed to find uniform location for 'projection'" << std::endl;
+        return;
+    }
+    glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
+}
+
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 {
     GLchar u_line = '|';
@@ -354,6 +374,8 @@ void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
     float x_Offset = -1 * ch.Bearing.x; // for the | character
 
     xpos += x_Offset;
+
+    updateProjection(program, xpos, ypos);
 
     // Define the vertices of the cursor
     float w = ch.Size.x * scale;
@@ -408,7 +430,6 @@ bool read_from_file(std::string &file_name)
             else
                 break;
         }
-        std::cout << space_count << std::endl;
         e.tab_offset_vec.push_back(TAB.length() * (space_count / TAB.length()));
         space_count = 0;
     }

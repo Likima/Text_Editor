@@ -55,6 +55,7 @@ const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
 //----
 
+
 int main(int argc, char **argv)
 {
     if (argc >= 2)
@@ -181,6 +182,8 @@ int main(int argc, char **argv)
         // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
         renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

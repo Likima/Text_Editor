@@ -33,9 +33,12 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_ENTER):
         {
+            std::string current_line = e.lines[e.cursor_y];
+            std::string new_line = current_line.substr(e.cursor_x);
+            e.lines[e.cursor_y].erase(e.cursor_x);
             e.cursor_y++;
             e.cursor_x = 0;
-            e.lines.push_back("");
+            e.lines.insert(e.lines.begin() + e.cursor_y, new_line);
         }
         break;
         case (GLFW_KEY_TAB):
@@ -80,8 +83,53 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             std::cout<<"CTRL PRESSED"<<std::endl;
         }
         break;
+        case (GLFW_KEY_BACKSPACE): {
+            if(e.cursor_x > 0) {
+                e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                e.cursor_x--;
+            }
+        }
+        break;
         default:
             std::cout << key << std::endl;
+        }
+    }
+    break;
+    case (GLFW_REPEAT): // Handle holding keys
+    {
+        switch (key)
+        {
+        case (GLFW_KEY_UP):
+        {
+            if(e.cursor_y > 0) {
+                if(e.cursor_x > e.lines[e.cursor_y - 1].length())
+                    e.cursor_x = e.lines[e.cursor_y - 1].length();
+                e.cursor_y--;
+            }
+        }
+        break;
+        case (GLFW_KEY_DOWN):
+        {
+            if(e.cursor_y < e.lines.size() - 1) {
+                if(e.cursor_x > e.lines[e.cursor_y + 1].length())
+                    e.cursor_x = e.lines[e.cursor_y + 1].length();
+                e.cursor_y++;
+            }
+        }
+        break;
+        case (GLFW_KEY_LEFT):
+        {
+            if (e.cursor_x > 0) {
+                e.cursor_x--;
+            }
+        }
+        break;
+        case (GLFW_KEY_RIGHT):
+        {
+            if (e.cursor_x < e.lines[e.cursor_y].length())
+                e.cursor_x++;
+        }
+        break;
         }
     }
     break;

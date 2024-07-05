@@ -336,9 +336,11 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+// Delete this function to remove the motion sickness
 void updateProjection(GLuint program, int xpos, int ypos)
 {
-    
+    if (!scrolling)
+        return;
     float offsetX = xpos - SCREEN_WIDTH / 2.0f;
     float offsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
 

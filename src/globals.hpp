@@ -40,6 +40,8 @@ extern int SCREEN_WIDTH;
 
 extern std::string save_file;
 
+extern bool scrolling;
+
 extern GLuint program;
 
 extern unsigned int VAO, VBO;

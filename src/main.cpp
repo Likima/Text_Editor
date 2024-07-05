@@ -25,6 +25,7 @@ int SCREEN_WIDTH = 800;
 GLuint program = 0;
 unsigned int VAO, VBO;
 std::string save_file;
+bool scrolling = true;
 // ---
 
 std::string operator*(const std::string &str, int times)
@@ -55,11 +56,16 @@ const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
 //----
 
-
 int main(int argc, char **argv)
 {
     if (argc >= 2)
     {
+        if (argc >= 3)
+        {
+            std::string toggle = argv[2];
+            if (toggle == "1")
+                scrolling = false;
+        }
         save_file = argv[1];
         if (!read_from_file(save_file))
         {
@@ -182,7 +188,6 @@ int main(int argc, char **argv)
         // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
         renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-        
 
         glfwSwapBuffers(window);
         glfwPollEvents();

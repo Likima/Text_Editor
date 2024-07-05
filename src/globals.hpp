@@ -4,11 +4,15 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <unordered_map>
+#include <regex>
 #include <fstream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // For glm::ortho
 #include <glm/gtc/type_ptr.hpp>         // For glm::value_ptr
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 struct Editor
 {
@@ -50,6 +54,30 @@ extern std::string operator*(const std::string &str, int times);
 
 // Overload the * operator to handle the case where the integer comes first
 extern std::string operator*(int times, const std::string &str);
+
+enum TokenType {
+    KEYWORD,
+    IDENTIFIER,
+    NUMBER,
+    STRING,
+    OPERATOR,
+    DELIMITER,
+    COMMENT,
+    UNKNOWN
+};
+
+struct Token {
+    TokenType type;
+    std::string text;
+    bool chroma;
+    glm::vec3 color;
+};
+
+extern std::vector<std::pair<TokenType, std::regex>> tokenDefinitions;
+extern std::unordered_map<TokenType, glm::vec3> tokenColors;
+
+std::vector<Token> tokenize(const std::string &code);
+void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale);
 
 // Not too sure what this does. Fixes seg fault though!
 static void load_gl_extensions(void)

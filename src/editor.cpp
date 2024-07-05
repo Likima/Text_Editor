@@ -226,48 +226,65 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
     glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale, glm::vec3 color)
+void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale)
 {
-    glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
     for (int i = 0; i < text.size(); i++)
     {
         float xPos = x; // Reset x position for each line
-        for (auto c = text[i].begin(); c != text[i].end(); c++)
+        std::vector<Token> tokens = tokenize(text[i]);
+        for (auto &token : tokens)
         {
-            Character ch = Characters[*c];
+            // Set the color based on token type
+            glm::vec3 color;
+            switch (token.type)
+            {
+                case KEYWORD:    color = glm::vec3(0.0f, 1.0f, 0.0f); break; // Green
+                case IDENTIFIER: color = glm::vec3(1.0f, 1.0f, 1.0f); break; // White
+                case NUMBER:     color = glm::vec3(1.0f, 1.0f, 0.0f); break; // Yellow
+                case STRING:     color = glm::vec3(1.0f, 0.0f, 1.0f); break; // Magenta
+                case OPERATOR:   color = glm::vec3(0.0f, 0.0f, 1.0f); break; // Blue
+                case COMMENT:    color = glm::vec3(0.5f, 0.5f, 0.5f); break; // Gray
+                default:         color = glm::vec3(1.0f, 1.0f, 1.0f); break; // Default to white
+            }
+            glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
 
-            float xpos = xPos + ch.Bearing.x * scale;
-            float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position
-            // std::cout << xpos << " " << ypos << " " << (ch.Size.y - ch.Bearing.y) << std::endl;
+            for (auto c = token.text.begin(); c != token.text.end(); c++)
+            {
+                Character ch = Characters[*c];
 
-            float w = ch.Size.x * scale;
-            float h = ch.Size.y * scale;
+                float xpos = xPos + ch.Bearing.x * scale;
+                float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position
 
-            float vertices[6][4] = {
-                {xpos, ypos + h, 0.0f, 0.0f},
-                {xpos, ypos, 0.0f, 1.0f},
-                {xpos + w, ypos, 1.0f, 1.0f},
+                float w = ch.Size.x * scale;
+                float h = ch.Size.y * scale;
 
-                {xpos, ypos + h, 0.0f, 0.0f},
-                {xpos + w, ypos, 1.0f, 1.0f},
-                {xpos + w, ypos + h, 1.0f, 0.0f}};
+                float vertices[6][4] = {
+                    {xpos, ypos + h, 0.0f, 0.0f},
+                    {xpos, ypos, 0.0f, 1.0f},
+                    {xpos + w, ypos, 1.0f, 1.0f},
 
-            glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-            glBindVertexArray(VAO);
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+                    {xpos, ypos + h, 0.0f, 0.0f},
+                    {xpos + w, ypos, 1.0f, 1.0f},
+                    {xpos + w, ypos + h, 1.0f, 0.0f}};
 
-            xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
+                glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+                glBindVertexArray(VAO);
+                glBindBuffer(GL_ARRAY_BUFFER, VBO);
+                glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
+            }
         }
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
 
 // Delete this function to remove the motion sickness
 void updateProjection(GLuint program, int xpos, int ypos)

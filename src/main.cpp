@@ -45,6 +45,7 @@ std::string operator*(int times, const std::string &str)
     return str * times;
 }
 
+#include "lexer.hpp"
 #include "initialization.hpp"
 #include "shader_processing.hpp"
 #include "editor.hpp"
@@ -183,10 +184,10 @@ int main(int argc, char **argv)
         // Render here
         // Calculate the elapsed time
         float timeValue = glfwGetTime();
-    
+
         // Use the shader program
         glUseProgram(program);
-    
+
         // Set the time uniform
         GLuint timeLocation = glGetUniformLocation(program, "time");
         glUniform1f(timeLocation, timeValue);
@@ -195,7 +196,7 @@ int main(int argc, char **argv)
 
         // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-        renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

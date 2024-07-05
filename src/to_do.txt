@@ -1,8 +1,10 @@
 2024-07-03:
-    Most important!!! Write/Read (to) file. <- Completion by 2024-07-04?
-    Add Backspace Support
-    Work on text handling
+    Most important!!! Write/Read (to) file. <- Completion by 2024-07-04? DONE!
+    Add Backspace Support DONE!
+    Work on text handling DONE!
+
     Create Lexer
+    Add CTRL + Arrows
 
 
 NOTES:

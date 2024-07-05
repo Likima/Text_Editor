@@ -27,10 +27,26 @@ unsigned int VAO, VBO;
 std::string save_file;
 // ---
 
+std::string operator*(const std::string &str, int times)
+{
+    std::string result;
+    result.reserve(str.size() * times); // Reserve space to avoid multiple reallocations
+    for (int i = 0; i < times; ++i)
+    {
+        result += str;
+    }
+    return result;
+}
+
+// Overload the * operator to handle the case where the integer comes first
+std::string operator*(int times, const std::string &str)
+{
+    return str * times;
+}
+
 #include "initialization.hpp"
 #include "shader_processing.hpp"
 #include "editor.hpp"
-
 
 // Global Definitions
 const char *VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
@@ -39,60 +55,33 @@ const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
 //----
 
-bool read_from_file(std::string &file_name) {
-    std::cout<<file_name<<std::endl;
-    // Validate the filename
-    if (file_name.empty()) {
-        std::cerr << "Invalid file name" << std::endl;
-        return false;
-    }
-
-    // Open the file
-    std::ifstream file(file_name);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file: " << file_name << std::endl;
-        return false;
-    }
-
-    // Read each line from the file and add it to e.lines vector
-    std::string line;
-    while (std::getline(file, line)) {
-        e.lines.push_back(line);
-    }
-
-    if (e.lines.size() > 0 && e.lines[0].empty()) {
-        if (!e.lines.empty()) {
-            e.lines.erase(e.lines.begin());
-        }
-    }
-
-    // Close the file
-    file.close();
-
-    return true;
-}
-
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    std::cout<<argc<<std::endl;
-    if (argc >= 2) {
+    if (argc >= 2)
+    {
         save_file = argv[1];
-        if (!read_from_file(save_file)) {
+        if (!read_from_file(save_file))
+        {
             {
                 std::ofstream outputFile(save_file);
-                if (!outputFile.is_open()) {
+                if (!outputFile.is_open())
+                {
                     std::cerr << "Failed to create file: " << save_file << std::endl;
                     return -1;
                 }
 
-                for (const std::string& line : e.lines) {
+                for (const std::string &line : e.lines)
+                {
                     outputFile << line << std::endl;
                 }
 
                 outputFile.close();
+                e.tab_offset_vec.push_back(0);
             }
         }
     }
+    else
+        e.tab_offset_vec.push_back(0);
     glfwSetErrorCallback(error_callback);
     // Creation of window
     if (!glfwInit())

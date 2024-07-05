@@ -13,6 +13,7 @@
 struct Editor
 {
     std::vector<std::string> lines = {""};
+    std::vector<int> tab_offset_vec = {};
     int num_lines;
     int characters_per_line;
     int cursor_x = 0; // TO DO : Update cursor_x
@@ -33,15 +34,20 @@ struct Character
 };
 
 extern std::map<GLchar, Character> Characters;
- 
+
 extern int SCREEN_HEIGHT;
 extern int SCREEN_WIDTH;
 
 extern std::string save_file;
 
 extern GLuint program;
- 
+
 extern unsigned int VAO, VBO;
+
+extern std::string operator*(const std::string &str, int times);
+
+// Overload the * operator to handle the case where the integer comes first
+extern std::string operator*(int times, const std::string &str);
 
 // Not too sure what this does. Fixes seg fault though!
 static void load_gl_extensions(void)
@@ -112,6 +118,5 @@ static void load_gl_extensions(void)
         fprintf(stderr, "WARN: EXT_draw_instanced is NOT supported\n");
     }
 }
-
 
 #endif

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <fstream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // For glm::ortho

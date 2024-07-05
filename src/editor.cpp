@@ -20,6 +20,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     {
         CTRL_PRESSED = false;
     }
+    break;
     case (GLFW_PRESS):
     {
         switch (key)
@@ -27,6 +28,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_ESCAPE):
         {
             glfwSetWindowShouldClose(window, GL_TRUE);
+            save_to_file();
         }
         break;
         case (GLFW_KEY_ENTER):
@@ -68,7 +70,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_RIGHT):
         {
-            if (e.cursor_x < e.lines[e.cursor_y].length() - 1)
+            if (e.cursor_x < e.lines[e.cursor_y].length())
                 e.cursor_x++;
         }
         break;
@@ -90,8 +92,29 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     }
 }
 
-void save_to_file(){
-    std::cout<<"HELLOOOOO"<<std::endl;
+void save_to_file(int added) {
+    if (save_file.empty()) {
+        save_file = "GenericFile" + std::to_string(added) + ".txt";
+        std::ifstream file(save_file.c_str());
+        if (file.is_open()) {
+            file.close();
+            save_file.clear();
+            save_to_file(added + 1);
+        } else {
+            std::ofstream file(save_file);
+            if (file.is_open())
+                file.close();
+            else
+                return;
+        }
+    }
+    std::ofstream file(save_file.c_str());
+    if (file.is_open()) {
+        for (const std::string& line : e.lines) {
+            file << line << std::endl;
+        }
+        file.close();
+    }
 }
 
 void char_callback(GLFWwindow *window, unsigned int codepoint)
@@ -170,7 +193,7 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
 
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 {
-    GLchar u_line = '_';
+    GLchar u_line = '|';
     Character ch = Characters[u_line];
     glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
@@ -181,6 +204,10 @@ void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
         xpos += (ch.Advance >> 6) * scale;
     }
     float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (FONT_SIZE * scale * (e.cursor_y)); // Adjust y position    
+
+    float x_Offset = -1 * ch.Bearing.x; // for the | character
+
+    xpos += x_Offset;
 
     // Define the vertices of the cursor
     float w = ch.Size.x * scale;

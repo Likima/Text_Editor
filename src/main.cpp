@@ -24,6 +24,7 @@ int SCREEN_HEIGHT = 600;
 int SCREEN_WIDTH = 800;
 GLuint program = 0;
 unsigned int VAO, VBO;
+std::string save_file;
 // ---
 
 #include "initialization.hpp"
@@ -38,13 +39,60 @@ const float x_Padding = 15.0f;
 const float y_Padding = FONT_SIZE + 15.0f;
 //----
 
+bool read_from_file(std::string &file_name) {
+    std::cout<<file_name<<std::endl;
+    // Validate the filename
+    if (file_name.empty()) {
+        std::cerr << "Invalid file name" << std::endl;
+        return false;
+    }
+
+    // Open the file
+    std::ifstream file(file_name);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << file_name << std::endl;
+        return false;
+    }
+
+    // Read each line from the file and add it to e.lines vector
+    std::string line;
+    while (std::getline(file, line)) {
+        e.lines.push_back(line);
+    }
+
+    if (e.lines.size() > 0 && e.lines[0].empty()) {
+        if (!e.lines.empty()) {
+            e.lines.erase(e.lines.begin());
+        }
+    }
+
+    // Close the file
+    file.close();
+
+    return true;
+}
+
 int main(int argc, char** argv)
 {
-    if (argc > 2) 
+    std::cout<<argc<<std::endl;
+    if (argc >= 2) {
         save_file = argv[1];
-    
+        if (!read_from_file(save_file)) {
+            {
+                std::ofstream outputFile(save_file);
+                if (!outputFile.is_open()) {
+                    std::cerr << "Failed to create file: " << save_file << std::endl;
+                    return -1;
+                }
 
-    // Rest of the code...
+                for (const std::string& line : e.lines) {
+                    outputFile << line << std::endl;
+                }
+
+                outputFile.close();
+            }
+        }
+    }
     glfwSetErrorCallback(error_callback);
     // Creation of window
     if (!glfwInit())

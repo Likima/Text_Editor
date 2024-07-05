@@ -24,6 +24,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     }
     break;
     case (GLFW_PRESS):
+    case (GLFW_REPEAT):
     {
         switch (key)
         {
@@ -65,6 +66,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_TAB):
         {
             push_to_editor(TAB);
+            e.tab_offset_vec[e.cursor_y] += 1;
         }
         break;
         case (GLFW_KEY_UP):
@@ -140,77 +142,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         }
     }
     break;
-    case (GLFW_REPEAT): // Handle holding keys
-    {
-        switch (key)
-        {
-        case (GLFW_KEY_UP):
-        {
-            if (e.cursor_y > 0)
-            {
-                if (e.cursor_x > e.lines[e.cursor_y - 1].length())
-                    e.cursor_x = e.lines[e.cursor_y - 1].length();
-                e.cursor_y--;
-            }
-        }
-        break;
-        case (GLFW_KEY_DOWN):
-        {
-            if (e.cursor_y < e.lines.size() - 1)
-            {
-                if (e.cursor_x > e.lines[e.cursor_y + 1].length())
-                    e.cursor_x = e.lines[e.cursor_y + 1].length();
-                e.cursor_y++;
-            }
-        }
-        break;
-        case (GLFW_KEY_LEFT):
-        {
-            if (e.cursor_x > 0)
-            {
-                e.cursor_x--;
-            }
-        }
-        break;
-        case (GLFW_KEY_RIGHT):
-        {
-            if (e.cursor_x < e.lines[e.cursor_y].length())
-                e.cursor_x++;
-        }
-        break;
-        case (GLFW_KEY_BACKSPACE):
-        {
-            if (e.cursor_x > 0)
-            {
-                if (e.cursor_x >= TAB.length() && e.lines[e.cursor_y].substr(e.cursor_x - TAB.length(), TAB.length()) == TAB)
-                {
-                    // Delete the whole tab
-                    e.lines[e.cursor_y].erase(e.cursor_x - TAB.length(), TAB.length());
-                    e.tab_offset_vec[e.cursor_y] -= TAB.length();
-                    e.cursor_x -= TAB.length();
-                }
-                else
-                {
-                    // Delete a single character
-                    e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                    e.cursor_x--;
-                }
-            }
-            else if (e.cursor_x == 0 && e.cursor_y > 0)
-            {
-                int prev_line_length = e.lines[e.cursor_y - 1].length();
-                e.lines[e.cursor_y - 1] += e.lines[e.cursor_y];
-                e.lines.erase(e.lines.begin() + e.cursor_y);
-                e.cursor_y--;
-                e.cursor_x = prev_line_length;
-            }
-        }
-        break;
-        }
     }
-    break;
-    }
-    if (CTRL_PRESSED && action == GLFW_PRESS || action == GLFW_REPEAT)
+    if (CTRL_PRESSED && action == GLFW_PRESS || action == GLFW_REPEAT) // means user has press CTRL + something
     {
         if (key == GLFW_KEY_S)
             save_to_file();

@@ -181,7 +181,15 @@ int main(int argc, char **argv)
     while (!glfwWindowShouldClose(window))
     {
         // Render here
-
+        // Calculate the elapsed time
+        float timeValue = glfwGetTime();
+    
+        // Use the shader program
+        glUseProgram(program);
+    
+        // Set the time uniform
+        GLuint timeLocation = glGetUniformLocation(program, "time");
+        glUniform1f(timeLocation, timeValue);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 

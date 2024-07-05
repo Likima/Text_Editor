@@ -5,6 +5,7 @@
 
     Create Lexer
     Add CTRL + Arrows
+    Reset the projection matrix when the cursor goes offscreen for (scrolling == false)
 
 
 NOTES:

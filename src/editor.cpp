@@ -3,7 +3,7 @@
 
 bool CTRL_PRESSED = false;
 
-const std::string TAB = "   ";
+const std::string TAB = "    ";
 
 void push_to_editor(std::string s)
 {
@@ -226,7 +226,6 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
     glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 }
 
-
 void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale)
 {
     glActiveTexture(GL_TEXTURE0);
@@ -238,18 +237,32 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
         std::vector<Token> tokens = tokenize(text[i]);
         for (auto &token : tokens)
         {
-            //printToken(token);
-            // Set the color based on token type
+            // printToken(token);
+            //  Set the color based on token type
             glm::vec3 color;
             switch (token.type)
             {
-                case KEYWORD:    color = glm::vec3(0.0f, 1.0f, 0.0f); break; // Green
-                case IDENTIFIER: color = glm::vec3(1.0f, 1.0f, 1.0f); break; // White
-                case NUMBER:     color = glm::vec3(1.0f, 1.0f, 0.0f); break; // Yellow
-                case STRING:     color = glm::vec3(1.0f, 0.0f, 1.0f); break; // Magenta
-                case OPERATOR:   color = glm::vec3(0.0f, 0.0f, 1.0f); break; // Blue
-                case COMMENT:    color = glm::vec3(0.5f, 0.5f, 0.5f); break; // Gray
-                default:         color = glm::vec3(1.0f, 1.0f, 1.0f); break; // Default to white
+            case KEYWORD:
+                color = glm::vec3(0.0f, 1.0f, 0.0f);
+                break; // Green
+            case IDENTIFIER:
+                color = glm::vec3(1.0f, 1.0f, 1.0f);
+                break; // White
+            case NUMBER:
+                color = glm::vec3(1.0f, 1.0f, 0.0f);
+                break; // Yellow
+            case STRING:
+                color = glm::vec3(1.0f, 0.0f, 1.0f);
+                break; // Magenta
+            case OPERATOR:
+                color = glm::vec3(0.0f, 0.0f, 1.0f);
+                break; // Blue
+            case COMMENT:
+                color = glm::vec3(0.5f, 0.5f, 0.5f);
+                break; // Gray
+            default:
+                color = glm::vec3(1.0f, 1.0f, 1.0f);
+                break; // Default to white
             }
             glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
 
@@ -288,13 +301,12 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-
 // Delete this function to remove the motion sickness
 void updateProjection(GLuint program, int xpos, int ypos)
 {
     if (!scrolling)
         return;
-    float offsetX = xpos - SCREEN_WIDTH / 2.0f;
+    float offsetX = (xpos - SCREEN_WIDTH / 2.0f) + SCREEN_WIDTH / 4.0f;
     float offsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
 
     glm::mat4 projection = glm::ortho(

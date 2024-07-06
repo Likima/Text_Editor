@@ -226,6 +226,7 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
     glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 }
 
+
 void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale)
 {
     glActiveTexture(GL_TEXTURE0);
@@ -237,6 +238,7 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
         std::vector<Token> tokens = tokenize(text[i]);
         for (auto &token : tokens)
         {
+            //printToken(token);
             // Set the color based on token type
             glm::vec3 color;
             switch (token.type)
@@ -254,6 +256,7 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
             for (auto c = token.text.begin(); c != token.text.end(); c++)
             {
                 Character ch = Characters[*c];
+                // std::cout << *c << " " << ch.Bearing.x << std::endl;
 
                 float xpos = xPos + ch.Bearing.x * scale;
                 float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position

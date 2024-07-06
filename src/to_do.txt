@@ -2,10 +2,12 @@
     Most important!!! Write/Read (to) file. <- Completion by 2024-07-04? DONE!
     Add Backspace Support DONE!
     Work on text handling DONE!
+    Create Lexer DONE (semi?)
 
-    Create Lexer
     Add CTRL + Arrows
     Reset the projection matrix when the cursor goes offscreen for (scrolling == false)
+    numbers don't work very well
+    make brackets their own string
 
 
 NOTES:

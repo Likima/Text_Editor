@@ -22,6 +22,7 @@ struct Editor
     int characters_per_line;
     int cursor_x = 0; // TO DO : Update cursor_x
     int cursor_y = 0;
+    int greatest_cursor_x = 0;
 };
 
 extern Editor e;

@@ -20,7 +20,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     {
     case (GLFW_RELEASE):
     {
-        CTRL_PRESSED = false;
+        if(key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL)
+            CTRL_PRESSED = false;
     }
     break;
     case (GLFW_PRESS):
@@ -46,7 +47,6 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             {
                 for (char &char_x : indent_keys)
                 {
-                    std::cout << e.lines[e.cursor_y - 1][e.cursor_x - 1] << std::endl;
                     if (e.lines[e.cursor_y - 1][e.cursor_x - 1] == char_x)
                     {
                         e.tab_offset_vec.insert(e.tab_offset_vec.begin() + e.cursor_y, TAB.length() + e.tab_offset_vec[e.cursor_y - 1]);
@@ -107,12 +107,34 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_RIGHT_CONTROL):
         {
             CTRL_PRESSED = true;
-            std::cout << "CTRL PRESSED" << std::endl;
         }
         break;
         case (GLFW_KEY_BACKSPACE):
         {
-            if (e.cursor_x > 0)
+            if (e.cursor_x == 0 && e.cursor_y > 0)
+            {
+                int prev_line_length = e.lines[e.cursor_y - 1].length();
+                e.lines[e.cursor_y - 1] += e.lines[e.cursor_y];
+                e.lines.erase(e.lines.begin() + e.cursor_y);
+                e.cursor_y--;
+                e.cursor_x = prev_line_length;
+            } 
+            else if (CTRL_PRESSED) {
+                // Delete to the nearest space or bracket
+                while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) &&
+                       e.lines[e.cursor_y][e.cursor_x - 1] != '(' && e.lines[e.cursor_y][e.cursor_x - 1] != '[' &&
+                       e.lines[e.cursor_y][e.cursor_x - 1] != '{') {
+                    e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                    e.cursor_x--;
+                }
+                if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1])) {
+                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1])) {
+                        e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                        e.cursor_x--;
+                    }
+                }
+            }
+            else if (e.cursor_x > 0)
             {
                 if (e.cursor_x >= TAB.length() && e.lines[e.cursor_y].substr(e.cursor_x - TAB.length(), TAB.length()) == TAB)
                 {
@@ -121,6 +143,15 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
                     e.tab_offset_vec[e.cursor_y] -= TAB.length();
                     e.cursor_x -= TAB.length();
                 }
+                else if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
+                {
+                    // Delete connected spaces
+                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
+                    {
+                        e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
+                        e.cursor_x--;
+                    }
+                }
                 else
                 {
                     // Delete a single character
@@ -128,13 +159,25 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
                     e.cursor_x--;
                 }
             }
-            else if (e.cursor_x == 0 && e.cursor_y > 0)
-            {
-                int prev_line_length = e.lines[e.cursor_y - 1].length();
-                e.lines[e.cursor_y - 1] += e.lines[e.cursor_y];
-                e.lines.erase(e.lines.begin() + e.cursor_y);
-                e.cursor_y--;
-                e.cursor_x = prev_line_length;
+        }
+        break;
+        case (GLFW_KEY_HOME): 
+        {
+            for (int i = 0; i < e.lines[e.cursor_y].length(); i++) {
+                if (!std::isspace(e.lines[e.cursor_y][i])) {
+                    e.cursor_x = i;
+                    break;
+                }
+            }
+        }
+        break;
+        case (GLFW_KEY_END):
+        {
+            for(int i = e.lines[e.cursor_y].length() - 1; i >= 0; i--) {
+                if (!std::isspace(e.lines[e.cursor_y][i])) {
+                    e.cursor_x = i+1;
+                    break;
+                }
             }
         }
         break;
@@ -146,15 +189,6 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     {
         if (key == GLFW_KEY_S)
             save_to_file();
-        else if (key == GLFW_KEY_BACKSPACE)
-        {
-            // Delete to the nearest space or bracket
-            while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) && e.lines[e.cursor_y][e.cursor_x - 1] != '(' && e.lines[e.cursor_y][e.cursor_x - 1] != '[' && e.lines[e.cursor_y][e.cursor_x - 1] != '{')
-            {
-                e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                e.cursor_x--;
-            }
-        }
     }
 }
 
@@ -197,7 +231,6 @@ void char_callback(GLFWwindow *window, unsigned int codepoint)
     {
     case (false):
     {
-        // std::cout << "Character input: " << character << " : " << std::endl;
         push_to_editor(character);
     }
     break;
@@ -288,7 +321,6 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
             for (auto c = token.text.begin(); c != token.text.end(); c++)
             {
                 Character ch = Characters[*c];
-                // std::cout << *c << " " << ch.Bearing.x << std::endl;
 
                 float xpos = xPos + ch.Bearing.x * scale;
                 float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position
@@ -367,17 +399,27 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+glm::vec2 currentCameraPos(0.0f, 0.0f);
+glm::vec2 targetCameraPos(0.0f, 0.0f);
+float interpolationFactor = 0.1f; // Adjust for smoothness
+
 // Delete this function to remove the motion sickness
 void updateProjection(GLuint program, int xpos, int ypos)
 {
     if (!scrolling)
         return;
-    float offsetX = (xpos - SCREEN_WIDTH / 2.0f) + SCREEN_WIDTH / 4.0f;
-    float offsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
+
+    float targetOffsetX = (xpos - SCREEN_WIDTH / 2.0f) + SCREEN_WIDTH / 6.0f;
+    float targetOffsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
+
+    targetCameraPos = glm::vec2(targetOffsetX, targetOffsetY);
+
+    // Interpolate between the current and target positions
+    currentCameraPos = glm::mix(currentCameraPos, targetCameraPos, interpolationFactor);
 
     glm::mat4 projection = glm::ortho(
-        offsetX, offsetX + static_cast<float>(SCREEN_WIDTH),
-        offsetY, offsetY + static_cast<float>(SCREEN_HEIGHT));
+        currentCameraPos.x, currentCameraPos.x + static_cast<float>(SCREEN_WIDTH),
+        currentCameraPos.y, currentCameraPos.y + static_cast<float>(SCREEN_HEIGHT));
 
     glUseProgram(program);
     GLuint mLocation = glGetUniformLocation(program, "projection");
@@ -388,6 +430,7 @@ void updateProjection(GLuint program, int xpos, int ypos)
     }
     glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
+
 
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 {

@@ -138,7 +138,6 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             }
         }
         break;
-            // default:
         }
     }
     break;
@@ -212,6 +211,22 @@ void char_callback(GLFWwindow *window, unsigned int codepoint)
     }
 }
 
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
+{
+    if (yoffset == -1 && e.cursor_y < e.lines.size())
+    {
+        e.cursor_y++;
+        if (e.cursor_x > e.lines[e.cursor_y + 1].length())
+            e.cursor_x = e.lines[e.cursor_y + 1].length();
+    }
+    else if (yoffset == 1 && e.cursor_y != 0)
+    {
+        e.cursor_y--;
+        if (e.cursor_x > e.lines[e.cursor_y - 1].length())
+            e.cursor_x = e.lines[e.cursor_y - 1].length();
+    }
+}
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
     // Adjust the viewport when the window is resized
@@ -228,6 +243,7 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 
 void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale)
 {
+    bool isKeyword = false;
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
@@ -244,6 +260,7 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
             {
             case KEYWORD:
                 color = glm::vec3(0.0f, 1.0f, 0.0f);
+                isKeyword = true;
                 break; // Green
             case IDENTIFIER:
                 color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -264,6 +281,8 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
                 color = glm::vec3(1.0f, 1.0f, 1.0f);
                 break; // Default to white
             }
+            glUniform1i(glGetUniformLocation(s, "isKeyword"), isKeyword);
+            isKeyword = false;
             glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
 
             for (auto c = token.text.begin(); c != token.text.end(); c++)
@@ -297,6 +316,53 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
             }
         }
     }
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
+{
+    glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(VAO);
+
+    float scale = 1.0f; // Adjust scale as necessary
+    std::string converted;
+    for (int i = 1; i <= e.lines.size(); i++)
+    {
+        converted = std::to_string(i);
+
+        float xPos = x; // Start position for line number
+        for (char c : converted)
+        {
+            Character ch = Characters[c];
+
+            float xpos = xPos + ch.Bearing.x * scale;
+            float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - ((i - 1) * FONT_SIZE * scale); // Adjust y position
+
+            float w = ch.Size.x * scale;
+            float h = ch.Size.y * scale;
+
+            float vertices[6][4] = {
+                {xpos, ypos + h, 0.0f, 0.0f},
+                {xpos, ypos, 0.0f, 1.0f},
+                {xpos + w, ypos, 1.0f, 1.0f},
+
+                {xpos, ypos + h, 0.0f, 0.0f},
+                {xpos + w, ypos, 1.0f, 1.0f},
+                {xpos + w, ypos + h, 1.0f, 0.0f}};
+
+            glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+            glBindVertexArray(VAO);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
+        }
+    }
+
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }

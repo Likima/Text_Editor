@@ -16,11 +16,12 @@
 void push_to_editor(std::string s);
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void char_callback(GLFWwindow *window, unsigned int codepoint);
-void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale, glm::vec3 color);
+void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale);
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color);
 void save_to_file(int added = 0);
 bool read_from_file(std::string &file_name);
-
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color);
 
 #endif

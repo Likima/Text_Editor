@@ -178,6 +178,7 @@ int main(int argc, char **argv)
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetCharCallback(window, char_callback);
+    glfwSetScrollCallback(window, scroll_callback);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -197,6 +198,7 @@ int main(int argc, char **argv)
         // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
         renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f);
+        renderLineNumbers(program, x_Padding - FONT_SIZE * 5, float(SCREEN_HEIGHT) - y_Padding, glm::vec3(0.0f, 1.0f, 0.0f));
 
         glfwSwapBuffers(window);
         glfwPollEvents();

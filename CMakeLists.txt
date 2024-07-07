@@ -17,11 +17,8 @@ find_package(GLEW REQUIRED)
 # Find FreeType
 find_package(Freetype REQUIRED)
 
-# Find SDL2
-find_package(SDL2 REQUIRED)
-
 # Add include directories
-include_directories(${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREETYPE_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS} include)
+include_directories(${OPENGL_INCLUDE_DIRS} ${GLFW_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREETYPE_INCLUDE_DIRS} include)
 
 # Add source files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -30,4 +27,4 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} glfw GLEW::GLEW Freetype::Freetype SDL2::SDL2)
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} glfw GLEW::GLEW Freetype::Freetype)

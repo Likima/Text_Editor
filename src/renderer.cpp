@@ -210,23 +210,11 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     {
         glBindTexture(GL_TEXTURE_2D, lnd.textures[i]);
         glDrawArrays(GL_TRIANGLES, lnd.indices[i], 6);
-
-        // Check for OpenGL errors after drawing each character
-        while ((err = glGetError()) != GL_NO_ERROR)
-        {
-            std::cerr << "OpenGL error during drawing: " << err << std::endl;
-        }
     }
 
     // Unbind the VAO and VBO
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
-
-    // Check for OpenGL errors after rendering
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL error after rendering: " << err << std::endl;
-    }
 }
 
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)

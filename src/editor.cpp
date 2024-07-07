@@ -213,7 +213,6 @@ bool read_from_file(std::string &file_name)
     std::ifstream file(file_name);
     if (!file.is_open())
     {
-        std::cerr << "Failed to open file: " << file_name << std::endl;
         return false;
     }
 

@@ -54,9 +54,13 @@ extern unsigned int VAO, VBO;
 extern std::string operator*(const std::string &str, int times);
 
 // Overload the * operator to handle the case where the integer comes first
-extern std::string operator*(int times, const std::string &str);
+extern std::string operator*(int times, const std::string &str);\
 
-enum TokenType {
+extern float x_Padding;
+extern float y_Padding;
+
+enum TokenType
+{
     KEYWORD,
     IDENTIFIER,
     NUMBER,
@@ -67,7 +71,8 @@ enum TokenType {
     UNKNOWN
 };
 
-struct Token {
+struct Token
+{
     TokenType type;
     std::string text;
     bool chroma;

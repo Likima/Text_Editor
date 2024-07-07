@@ -4,6 +4,7 @@
 bool CTRL_PRESSED = false;
 
 const std::string TAB = "    ";
+const std::vector<char> delimiters = {'"', '\'', '(', ')', '{', '}', '[', ']', '/', ':', ';', '<', '>'};
 
 void push_to_editor(std::string s)
 {
@@ -20,7 +21,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     {
     case (GLFW_RELEASE):
     {
-        if(key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL)
+        if (key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL)
             CTRL_PRESSED = false;
     }
     break;
@@ -93,14 +94,86 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         {
             if (e.cursor_x > 0)
             {
-                e.cursor_x--;
+                if (CTRL_PRESSED)
+                {
+                    // Handle delimiters
+                    if (std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) != delimiters.end())
+                    {
+                        while (e.cursor_x > 0 && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) != delimiters.end())
+                        {
+                            e.cursor_x--;
+                        }
+                    }
+                    else
+                    {
+                        // Skip whitespace first
+                        while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
+                        {
+                            e.cursor_x--;
+                        }
+
+                        // Then skip non-whitespace characters
+                        while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) == delimiters.end())
+                        {
+                            e.cursor_x--;
+                        }
+                    }
+                }
+                else
+                {
+                    e.cursor_x--;
+                }
+            }
+            else if (e.cursor_y > 0)
+            {
+                // If the user presses left on a space such as
+                // hello world!
+                // |
+                // then the cursor goes : hello world!|
+                e.cursor_y--;
+                e.cursor_x = e.lines[e.cursor_y].length();
             }
         }
         break;
         case (GLFW_KEY_RIGHT):
         {
             if (e.cursor_x < e.lines[e.cursor_y].length())
-                e.cursor_x++;
+            {
+                if (CTRL_PRESSED)
+                {
+                    // Handle delimiters
+                    if (std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) != delimiters.end())
+                    {
+                        while (e.cursor_x < e.lines[e.cursor_y].length() && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) != delimiters.end())
+                        {
+                            e.cursor_x++;
+                        }
+                    }
+                    else
+                    {
+                        // Skip whitespace first
+                        while (e.cursor_x < e.lines[e.cursor_y].length() && std::isspace(e.lines[e.cursor_y][e.cursor_x]))
+                        {
+                            e.cursor_x++;
+                        }
+
+                        // Then skip non-whitespace characters
+                        while (e.cursor_x < e.lines[e.cursor_y].length() && !std::isspace(e.lines[e.cursor_y][e.cursor_x]) && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) == delimiters.end())
+                        {
+                            e.cursor_x++;
+                        }
+                    }
+                }
+                else
+                {
+                    e.cursor_x++;
+                }
+            }
+            else if (e.cursor_y < e.lines.size() - 1)
+            {
+                e.cursor_y++;
+                e.cursor_x = 0;
+            }
         }
         break;
         case (GLFW_KEY_LEFT_CONTROL):
@@ -118,17 +191,21 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
                 e.lines.erase(e.lines.begin() + e.cursor_y);
                 e.cursor_y--;
                 e.cursor_x = prev_line_length;
-            } 
-            else if (CTRL_PRESSED) {
+            }
+            else if (CTRL_PRESSED)
+            {
                 // Delete to the nearest space or bracket
                 while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) &&
                        e.lines[e.cursor_y][e.cursor_x - 1] != '(' && e.lines[e.cursor_y][e.cursor_x - 1] != '[' &&
-                       e.lines[e.cursor_y][e.cursor_x - 1] != '{') {
+                       e.lines[e.cursor_y][e.cursor_x - 1] != '{')
+                {
                     e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
                     e.cursor_x--;
                 }
-                if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1])) {
-                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1])) {
+                if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
+                {
+                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
+                    {
                         e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
                         e.cursor_x--;
                     }
@@ -161,10 +238,12 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             }
         }
         break;
-        case (GLFW_KEY_HOME): 
+        case (GLFW_KEY_HOME):
         {
-            for (int i = 0; i < e.lines[e.cursor_y].length(); i++) {
-                if (!std::isspace(e.lines[e.cursor_y][i])) {
+            for (int i = 0; i < e.lines[e.cursor_y].length(); i++)
+            {
+                if (!std::isspace(e.lines[e.cursor_y][i]))
+                {
                     e.cursor_x = i;
                     break;
                 }
@@ -173,9 +252,11 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_END):
         {
-            for(int i = e.lines[e.cursor_y].length() - 1; i >= 0; i--) {
-                if (!std::isspace(e.lines[e.cursor_y][i])) {
-                    e.cursor_x = i+1;
+            for (int i = e.lines[e.cursor_y].length() - 1; i >= 0; i--)
+            {
+                if (!std::isspace(e.lines[e.cursor_y][i]))
+                {
+                    e.cursor_x = i + 1;
                     break;
                 }
             }
@@ -337,14 +418,13 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
                     {xpos + w, ypos, 1.0f, 1.0f},
                     {xpos + w, ypos + h, 1.0f, 0.0f}};
 
+                xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
                 glBindTexture(GL_TEXTURE_2D, ch.TextureID);
                 glBindVertexArray(VAO);
                 glBindBuffer(GL_ARRAY_BUFFER, VBO);
                 glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
                 glDrawArrays(GL_TRIANGLES, 0, 6);
-
-                xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
             }
         }
     }
@@ -430,7 +510,6 @@ void updateProjection(GLuint program, int xpos, int ypos)
     }
     glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }
-
 
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 {

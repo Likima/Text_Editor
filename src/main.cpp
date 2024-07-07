@@ -17,7 +17,6 @@
 
 #include "globals.hpp"
 
-Editor e; // Does this make you happy compiler???
 // Defined (external) in globals.hpp
 std::map<GLchar, Character> Characters;
 int SCREEN_HEIGHT = 600;
@@ -26,6 +25,7 @@ GLuint program = 0;
 unsigned int VAO, VBO;
 std::string save_file;
 bool scrolling = true;
+Editor e;
 // ---
 
 std::string operator*(const std::string &str, int times)
@@ -53,8 +53,8 @@ std::string operator*(int times, const std::string &str)
 // Global Definitions
 const char *VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";
 const char *FRAG_SHADER_PATH = "../shaders/font-frag.glsl";
-const float x_Padding = 15.0f;
-const float y_Padding = FONT_SIZE + 15.0f;
+float x_Padding = 15.0f;
+float y_Padding = FONT_SIZE + 15.0f;
 //----
 
 int main(int argc, char **argv)
@@ -179,11 +179,12 @@ int main(int argc, char **argv)
     glfwSetKeyCallback(window, key_callback);
     glfwSetCharCallback(window, char_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSwapInterval(1);
+
+    int prevNumLines = 0;
 
     while (!glfwWindowShouldClose(window))
     {
-        // Render here
-        // Calculate the elapsed time
         float timeValue = glfwGetTime();
 
         // Use the shader program
@@ -195,10 +196,14 @@ int main(int argc, char **argv)
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-        renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f);
+        // if (e.lines.size() != prevNumLines || prevNumLines == 0)
+        //{
+        //     renderLineNumbers(program, x_Padding - FONT_SIZE * 3, float(SCREEN_HEIGHT) - y_Padding, glm::vec3(0.0f, 1.0f, 0.0f));
+        // }
+        // prevNumLines = e.lines.size();
         renderLineNumbers(program, x_Padding - FONT_SIZE * 3, float(SCREEN_HEIGHT) - y_Padding, glm::vec3(0.0f, 1.0f, 0.0f));
+        renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

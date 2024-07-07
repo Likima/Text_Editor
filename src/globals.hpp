@@ -54,7 +54,7 @@ extern unsigned int VAO, VBO;
 extern std::string operator*(const std::string &str, int times);
 
 // Overload the * operator to handle the case where the integer comes first
-extern std::string operator*(int times, const std::string &str);\
+extern std::string operator*(int times, const std::string &str);
 
 extern float x_Padding;
 extern float y_Padding;
@@ -82,8 +82,12 @@ struct Token
 extern std::vector<std::pair<TokenType, std::regex>> tokenDefinitions;
 extern std::unordered_map<TokenType, glm::vec3> tokenColors;
 
+extern std::vector<char> delimiters;
+extern std::string TAB;
+
 std::vector<Token> tokenize(const std::string &code);
 void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale);
+void push_to_editor(std::string s);
 
 // Not too sure what this does. Fixes seg fault though!
 static void load_gl_extensions(void)

@@ -26,6 +26,8 @@ unsigned int VAO, VBO;
 std::string save_file;
 bool scrolling = true;
 Editor e;
+std::string TAB = "    ";
+std::vector<char> delimiters = {'"', '\'', '(', ')', '{', '}', '[', ']', '/', ':', ';', '<', '>'};
 // ---
 
 std::string operator*(const std::string &str, int times)
@@ -49,6 +51,7 @@ std::string operator*(int times, const std::string &str)
 #include "initialization.hpp"
 #include "shader_processing.hpp"
 #include "editor.hpp"
+#include "callbacks.hpp"
 
 // Global Definitions
 const char *VERTEX_SHADER_PATH = "../shaders/font-vertex.glsl";

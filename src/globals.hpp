@@ -55,6 +55,9 @@ extern unsigned int VAO, VBO;
 
 extern bool CTRL_PRESSED;
 
+extern bool text_changed;
+extern bool line_nums_changed;
+
 extern std::string operator*(const std::string &str, int times);
 
 // Overload the * operator to handle the case where the integer comes first

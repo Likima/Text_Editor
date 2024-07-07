@@ -1,78 +1,103 @@
 #include "globals.hpp"
 #include "renderer.hpp"
 
+struct lineNumberData
+{
+    std::string converted;
+    std::vector<float> vertices;
+    std::vector<GLuint> textures;
+    std::vector<size_t> indices;
+};
+
+struct textData
+{
+    std::vector<float> vertices;
+    std::vector<GLuint> textures;
+    std::vector<size_t> indices;
+    std::vector<glm::vec3> colors; // Store colors for each character batch
+};
+
+lineNumberData lnd;
+textData td;
+
 void renderText(GLuint &s, std::vector<std::string> text, float x, float y, float scale)
 {
     glUseProgram(s);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
-
-    std::vector<float> vertices;
-    std::vector<GLuint> textures;
-    std::vector<size_t> indices;
-    std::vector<glm::vec3> colors; // Store colors for each character batch
-
-    for (int i = 0; i < text.size(); i++)
+    if (text_changed)
     {
-        float xPos = x; // Reset x position for each line
-        std::vector<Token> tokens = tokenize(text[i]);
-        for (auto &token : tokens)
+        std::vector<float> vertices;
+        std::vector<GLuint> textures;
+        std::vector<size_t> indices;
+        std::vector<glm::vec3> colors; // Store colors for each character batch
+
+        for (int i = 0; i < text.size(); i++)
         {
-            glm::vec3 color;
-            switch (token.type)
+            float xPos = x; // Reset x position for each line
+            std::vector<Token> tokens = tokenize(text[i]);
+            for (auto &token : tokens)
             {
-            case KEYWORD:
-                color = glm::vec3(0.0f, 1.0f, 0.0f); // Green
-                break;
-            case IDENTIFIER:
-                color = glm::vec3(1.0f, 1.0f, 1.0f); // White
-                break;
-            case NUMBER:
-                color = glm::vec3(1.0f, 1.0f, 0.0f); // Yellow
-                break;
-            case STRING:
-                color = glm::vec3(1.0f, 0.0f, 1.0f); // Magenta
-                break;
-            case OPERATOR:
-                color = glm::vec3(0.0f, 0.0f, 1.0f); // Blue
-                break;
-            case COMMENT:
-                color = glm::vec3(0.5f, 0.5f, 0.5f); // Gray
-                break;
-            default:
-                color = glm::vec3(1.0f, 1.0f, 1.0f); // Default to white
-                break;
-            }
+                glm::vec3 color;
+                switch (token.type)
+                {
+                case KEYWORD:
+                    color = glm::vec3(0.0f, 1.0f, 0.0f); // Green
+                    break;
+                case IDENTIFIER:
+                    color = glm::vec3(1.0f, 1.0f, 1.0f); // White
+                    break;
+                case NUMBER:
+                    color = glm::vec3(1.0f, 1.0f, 0.0f); // Yellow
+                    break;
+                case STRING:
+                    color = glm::vec3(1.0f, 0.0f, 1.0f); // Magenta
+                    break;
+                case OPERATOR:
+                    color = glm::vec3(0.0f, 0.0f, 1.0f); // Blue
+                    break;
+                case COMMENT:
+                    color = glm::vec3(0.5f, 0.5f, 0.5f); // Gray
+                    break;
+                default:
+                    color = glm::vec3(1.0f, 1.0f, 1.0f); // Default to white
+                    break;
+                }
 
-            for (auto c = token.text.begin(); c != token.text.end(); c++)
-            {
-                Character ch = Characters[*c];
+                for (auto c = token.text.begin(); c != token.text.end(); c++)
+                {
+                    Character ch = Characters[*c];
 
-                float xpos = xPos + ch.Bearing.x * scale;
-                float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position
+                    float xpos = xPos + ch.Bearing.x * scale;
+                    float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - (i * FONT_SIZE * scale); // Adjust y position
 
-                float w = ch.Size.x * scale;
-                float h = ch.Size.y * scale;
+                    float w = ch.Size.x * scale;
+                    float h = ch.Size.y * scale;
 
-                vertices.insert(vertices.end(), {xpos, ypos + h, 0.0f, 0.0f,
-                                                 xpos, ypos, 0.0f, 1.0f,
-                                                 xpos + w, ypos, 1.0f, 1.0f,
-                                                 xpos, ypos + h, 0.0f, 0.0f,
-                                                 xpos + w, ypos, 1.0f, 1.0f,
-                                                 xpos + w, ypos + h, 1.0f, 0.0f});
+                    vertices.insert(vertices.end(), {xpos, ypos + h, 0.0f, 0.0f,
+                                                     xpos, ypos, 0.0f, 1.0f,
+                                                     xpos + w, ypos, 1.0f, 1.0f,
+                                                     xpos, ypos + h, 0.0f, 0.0f,
+                                                     xpos + w, ypos, 1.0f, 1.0f,
+                                                     xpos + w, ypos + h, 1.0f, 0.0f});
 
-                textures.push_back(ch.TextureID);
-                indices.push_back(vertices.size() / 4 - 6); // Index of the first vertex for this character
-                colors.push_back(color);
+                    textures.push_back(ch.TextureID);
+                    indices.push_back(vertices.size() / 4 - 6); // Index of the first vertex for this character
+                    colors.push_back(color);
 
-                xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
+                    xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
+                }
             }
         }
+        td.colors = colors;
+        td.indices = indices;
+        td.textures = textures;
+        td.vertices = vertices;
     }
 
     // Bind the VBO and upload vertex data
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, td.vertices.size() * sizeof(float), td.vertices.data(), GL_DYNAMIC_DRAW);
 
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR)
@@ -81,14 +106,14 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     }
 
     // Draw the characters
-    for (size_t i = 0; i < textures.size(); i++)
+    for (size_t i = 0; i < td.textures.size(); i++)
     {
-        glBindTexture(GL_TEXTURE_2D, textures[i]);
+        glBindTexture(GL_TEXTURE_2D, td.textures[i]);
 
         // Set the text color for the current batch
-        glUniform3f(glGetUniformLocation(s, "textColor"), colors[i].x, colors[i].y, colors[i].z);
+        glUniform3f(glGetUniformLocation(s, "textColor"), td.colors[i].x, td.colors[i].y, td.colors[i].z);
 
-        glDrawArrays(GL_TRIANGLES, indices[i], 6);
+        glDrawArrays(GL_TRIANGLES, td.indices[i], 6);
 
         while ((err = glGetError()) != GL_NO_ERROR)
         {
@@ -122,49 +147,56 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     glBindVertexArray(VAO);
 
     float scale = 1.0f; // Adjust scale as necessary
-    std::string converted;
-    std::vector<float> vertices;
-    std::vector<GLuint> textures;
-    std::vector<size_t> indices;
-
-    for (int i = 1; i <= e.lines.size(); i++)
+    if (line_nums_changed)
     {
-        converted = std::to_string(i);
-        float xPos = x; // Start position for line number
+        std::string converted;
+        std::vector<float> vertices;
+        std::vector<GLuint> textures;
+        std::vector<size_t> indices;
 
-        for (char c : converted)
+        for (int i = 1; i <= e.lines.size(); i++)
         {
-            Character ch = Characters[c];
+            converted = std::to_string(i);
+            float xPos = x; // Start position for line number
 
-            if (ch.TextureID == 0)
+            for (char c : converted)
             {
-                std::cerr << "Invalid texture ID for character: " << c << std::endl;
-                continue;
+                Character ch = Characters[c];
+
+                if (ch.TextureID == 0)
+                {
+                    std::cerr << "Invalid texture ID for character: " << c << std::endl;
+                    continue;
+                }
+
+                float xpos = xPos + ch.Bearing.x * scale;
+                float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - ((i - 1) * FONT_SIZE * scale); // Adjust y position
+
+                float w = ch.Size.x * scale;
+                float h = ch.Size.y * scale;
+
+                vertices.insert(vertices.end(), {xpos, ypos + h, 0.0f, 0.0f,
+                                                 xpos, ypos, 0.0f, 1.0f,
+                                                 xpos + w, ypos, 1.0f, 1.0f,
+                                                 xpos, ypos + h, 0.0f, 0.0f,
+                                                 xpos + w, ypos, 1.0f, 1.0f,
+                                                 xpos + w, ypos + h, 1.0f, 0.0f});
+
+                textures.push_back(ch.TextureID);
+                indices.push_back(vertices.size() / 4 - 6); // Index of the first vertex for this character
+
+                xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
             }
-
-            float xpos = xPos + ch.Bearing.x * scale;
-            float ypos = y - (ch.Size.y - ch.Bearing.y) * scale - ((i - 1) * FONT_SIZE * scale); // Adjust y position
-
-            float w = ch.Size.x * scale;
-            float h = ch.Size.y * scale;
-
-            vertices.insert(vertices.end(), {xpos, ypos + h, 0.0f, 0.0f,
-                                             xpos, ypos, 0.0f, 1.0f,
-                                             xpos + w, ypos, 1.0f, 1.0f,
-                                             xpos, ypos + h, 0.0f, 0.0f,
-                                             xpos + w, ypos, 1.0f, 1.0f,
-                                             xpos + w, ypos + h, 1.0f, 0.0f});
-
-            textures.push_back(ch.TextureID);
-            indices.push_back(vertices.size() / 4 - 6); // Index of the first vertex for this character
-
-            xPos += (ch.Advance >> 6) * scale; // Advance cursor to next glyph
         }
+        lnd.converted = converted;
+        lnd.vertices = vertices;
+        lnd.textures = textures;
+        lnd.indices = indices;
     }
 
     // Bind the VBO and upload vertex data
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, lnd.vertices.size() * sizeof(float), lnd.vertices.data(), GL_DYNAMIC_DRAW);
 
     // Check for OpenGL errors before drawing
     GLenum err;
@@ -174,10 +206,10 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     }
 
     // Draw the characters
-    for (size_t i = 0; i < textures.size(); i++)
+    for (size_t i = 0; i < lnd.textures.size(); i++)
     {
-        glBindTexture(GL_TEXTURE_2D, textures[i]);
-        glDrawArrays(GL_TRIANGLES, indices[i], 6);
+        glBindTexture(GL_TEXTURE_2D, lnd.textures[i]);
+        glDrawArrays(GL_TRIANGLES, lnd.indices[i], 6);
 
         // Check for OpenGL errors after drawing each character
         while ((err = glGetError()) != GL_NO_ERROR)
@@ -242,7 +274,7 @@ void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 
 glm::vec2 currentCameraPos(0.0f, 0.0f);
 glm::vec2 targetCameraPos(0.0f, 0.0f);
-float interpolationFactor = 0.05f; // Adjust for smoothness
+float interpolationFactor = 0.3f; // Adjust for smoothness
 
 // Delete this function to remove the motion sickness
 void updateProjection(GLuint program, int xpos, int ypos)

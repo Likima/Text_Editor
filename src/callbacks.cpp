@@ -3,6 +3,8 @@
 #include "callbacks.hpp"
 
 bool CTRL_PRESSED = false;
+bool text_changed = true;
+bool line_nums_changed = true;
 
 void save_to_file(int added)
 {
@@ -60,12 +62,15 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_ENTER):
         {
             enter_to_editor();
+            text_changed = true;
+            line_nums_changed = true;
         }
         break;
         case (GLFW_KEY_TAB):
         {
             push_to_editor(TAB);
             e.tab_offset_vec[e.cursor_y] += 1;
+            text_changed = true;
         }
         break;
         case (GLFW_KEY_UP):
@@ -97,6 +102,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case (GLFW_KEY_BACKSPACE):
         {
             editor_backspace();
+            text_changed = true;
         }
         break;
         case (GLFW_KEY_HOME):
@@ -136,6 +142,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 void char_callback(GLFWwindow *window, unsigned int codepoint)
 {
+    text_changed = true;
     std::string character(1, static_cast<char>(codepoint));
     switch (CTRL_PRESSED)
     {

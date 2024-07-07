@@ -183,7 +183,7 @@ int main(int argc, char **argv)
     glfwSetKeyCallback(window, key_callback);
     glfwSetCharCallback(window, char_callback);
     glfwSetScrollCallback(window, scroll_callback);
-    glfwSwapInterval(1);
+    // glfwSwapInterval(1);
 
     int prevNumLines = 0;
 

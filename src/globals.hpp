@@ -30,6 +30,7 @@ extern Editor e;
 
 #define FONT_SIZE 20
 #define FONT_PATH "../Fonts/VictorMono-Regular.ttf"
+#define SIMPLE_VERTICIES_CAP 1920000
 ;
 struct Character
 {

@@ -201,11 +201,6 @@ int main(int argc, char **argv)
         glClear(GL_COLOR_BUFFER_BIT);
 
         renderCursor(program, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-        // if (e.lines.size() != prevNumLines || prevNumLines == 0)
-        //{
-        //     renderLineNumbers(program, x_Padding - FONT_SIZE * 3, float(SCREEN_HEIGHT) - y_Padding, glm::vec3(0.0f, 1.0f, 0.0f));
-        // }
-        // prevNumLines = e.lines.size();
         renderLineNumbers(program, x_Padding - FONT_SIZE * 3, float(SCREEN_HEIGHT) - y_Padding, glm::vec3(0.0f, 1.0f, 0.0f));
         renderText(program, e.lines, x_Padding, float(SCREEN_HEIGHT) - y_Padding, 1.0f);
 

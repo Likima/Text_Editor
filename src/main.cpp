@@ -51,6 +51,7 @@ std::string operator*(int times, const std::string &str)
 #include "initialization.hpp"
 #include "shader_processing.hpp"
 #include "editor.hpp"
+#include "renderer.hpp"
 #include "callbacks.hpp"
 
 // Global Definitions

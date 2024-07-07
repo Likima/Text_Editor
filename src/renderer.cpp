@@ -125,38 +125,6 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-glm::vec2 currentCameraPos(0.0f, 0.0f);
-glm::vec2 targetCameraPos(0.0f, 0.0f);
-float interpolationFactor = 0.01f; // Adjust for smoothness
-
-// Delete this function to remove the motion sickness
-void updateProjection(GLuint program, int xpos, int ypos)
-{
-    if (!scrolling)
-        return;
-
-    float targetOffsetX = (xpos - SCREEN_WIDTH / 2.0f) + SCREEN_WIDTH / 6.0f;
-    float targetOffsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
-
-    targetCameraPos = glm::vec2(targetOffsetX, targetOffsetY);
-
-    // Interpolate between the current and target positions
-    currentCameraPos = glm::mix(currentCameraPos, targetCameraPos, interpolationFactor);
-
-    glm::mat4 projection = glm::ortho(
-        currentCameraPos.x, currentCameraPos.x + static_cast<float>(SCREEN_WIDTH),
-        currentCameraPos.y, currentCameraPos.y + static_cast<float>(SCREEN_HEIGHT));
-
-    glUseProgram(program);
-    GLuint mLocation = glGetUniformLocation(program, "projection");
-    if (mLocation == -1)
-    {
-        std::cerr << "Failed to find uniform location for 'projection'" << std::endl;
-        return;
-    }
-    glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
-}
-
 void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
 {
     GLchar u_line = '|';
@@ -198,4 +166,36 @@ void renderCursor(GLuint &s, float x, float y, float scale, glm::vec3 color)
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glBindVertexArray(0);
+}
+
+glm::vec2 currentCameraPos(0.0f, 0.0f);
+glm::vec2 targetCameraPos(0.0f, 0.0f);
+float interpolationFactor = 0.01f; // Adjust for smoothness
+
+// Delete this function to remove the motion sickness
+void updateProjection(GLuint program, int xpos, int ypos)
+{
+    if (!scrolling)
+        return;
+
+    float targetOffsetX = (xpos - SCREEN_WIDTH / 2.0f) + SCREEN_WIDTH / 6.0f;
+    float targetOffsetY = ypos - SCREEN_HEIGHT / 2.0f; // Y-axis might be inverted
+
+    targetCameraPos = glm::vec2(targetOffsetX, targetOffsetY);
+
+    // Interpolate between the current and target positions
+    currentCameraPos = glm::mix(currentCameraPos, targetCameraPos, interpolationFactor);
+
+    glm::mat4 projection = glm::ortho(
+        currentCameraPos.x, currentCameraPos.x + static_cast<float>(SCREEN_WIDTH),
+        currentCameraPos.y, currentCameraPos.y + static_cast<float>(SCREEN_HEIGHT));
+
+    glUseProgram(program);
+    GLuint mLocation = glGetUniformLocation(program, "projection");
+    if (mLocation == -1)
+    {
+        std::cerr << "Failed to find uniform location for 'projection'" << std::endl;
+        return;
+    }
+    glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(projection));
 }

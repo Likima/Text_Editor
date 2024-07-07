@@ -52,6 +52,8 @@ extern GLuint program;
 
 extern unsigned int VAO, VBO;
 
+extern bool CTRL_PRESSED;
+
 extern std::string operator*(const std::string &str, int times);
 
 // Overload the * operator to handle the case where the integer comes first

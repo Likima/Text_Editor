@@ -1,4 +1,5 @@
 #include "globals.hpp"
+#include "editor.hpp"
 #include "callbacks.hpp"
 
 bool CTRL_PRESSED = false;
@@ -58,30 +59,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_ENTER):
         {
-            bool marked = true;
-            std::vector<char> indent_keys = {':', '{', '[', '('};
-            std::string current_line = e.lines[e.cursor_y];
-            std::string new_line = current_line.substr(e.cursor_x);
-            e.lines[e.cursor_y].erase(e.cursor_x);
-            e.cursor_y++;
-            if (!e.lines[e.cursor_y - 1].empty())
-            {
-                for (char &char_x : indent_keys)
-                {
-                    if (e.lines[e.cursor_y - 1][e.cursor_x - 1] == char_x)
-                    {
-                        e.tab_offset_vec.insert(e.tab_offset_vec.begin() + e.cursor_y, TAB.length() + e.tab_offset_vec[e.cursor_y - 1]);
-                        marked = false;
-                    }
-                }
-            }
-            if (marked)
-            {
-                e.tab_offset_vec.insert(e.tab_offset_vec.begin() + e.cursor_y, e.tab_offset_vec[e.cursor_y - 1]);
-            }
-            e.cursor_x = 0 + e.tab_offset_vec[e.cursor_y];
-            new_line = (TAB * e.tab_offset_vec[e.cursor_y]) + new_line;
-            e.lines.insert(e.lines.begin() + e.cursor_y, new_line);
+            enter_to_editor();
         }
         break;
         case (GLFW_KEY_TAB):
@@ -92,108 +70,22 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_UP):
         {
-            if (e.cursor_y > 0)
-            {
-                if (e.cursor_x > e.lines[e.cursor_y - 1].length())
-                    e.cursor_x = e.lines[e.cursor_y - 1].length();
-                e.cursor_y--;
-            }
+            editor_up();
         }
         break;
         case (GLFW_KEY_DOWN):
         {
-            if (e.cursor_y < e.lines.size() - 1)
-            {
-                if (e.cursor_x > e.lines[e.cursor_y + 1].length())
-                    e.cursor_x = e.lines[e.cursor_y + 1].length();
-                e.cursor_y++;
-            }
+            editor_down();
         }
         break;
         case (GLFW_KEY_LEFT):
         {
-            if (e.cursor_x > 0)
-            {
-                if (CTRL_PRESSED)
-                {
-                    // Handle delimiters
-                    if (std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) != delimiters.end())
-                    {
-                        while (e.cursor_x > 0 && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) != delimiters.end())
-                        {
-                            e.cursor_x--;
-                        }
-                    }
-                    else
-                    {
-                        // Skip whitespace first
-                        while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
-                        {
-                            e.cursor_x--;
-                        }
-
-                        // Then skip non-whitespace characters
-                        while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x - 1]) == delimiters.end())
-                        {
-                            e.cursor_x--;
-                        }
-                    }
-                }
-                else
-                {
-                    e.cursor_x--;
-                }
-            }
-            else if (e.cursor_y > 0)
-            {
-                // If the user presses left on a space such as
-                // hello world!
-                // |
-                // then the cursor goes : hello world!|
-                e.cursor_y--;
-                e.cursor_x = e.lines[e.cursor_y].length();
-            }
+            editor_left();
         }
         break;
         case (GLFW_KEY_RIGHT):
         {
-            if (e.cursor_x < e.lines[e.cursor_y].length())
-            {
-                if (CTRL_PRESSED)
-                {
-                    // Handle delimiters
-                    if (std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) != delimiters.end())
-                    {
-                        while (e.cursor_x < e.lines[e.cursor_y].length() && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) != delimiters.end())
-                        {
-                            e.cursor_x++;
-                        }
-                    }
-                    else
-                    {
-                        // Skip whitespace first
-                        while (e.cursor_x < e.lines[e.cursor_y].length() && std::isspace(e.lines[e.cursor_y][e.cursor_x]))
-                        {
-                            e.cursor_x++;
-                        }
-
-                        // Then skip non-whitespace characters
-                        while (e.cursor_x < e.lines[e.cursor_y].length() && !std::isspace(e.lines[e.cursor_y][e.cursor_x]) && std::find(delimiters.begin(), delimiters.end(), e.lines[e.cursor_y][e.cursor_x]) == delimiters.end())
-                        {
-                            e.cursor_x++;
-                        }
-                    }
-                }
-                else
-                {
-                    e.cursor_x++;
-                }
-            }
-            else if (e.cursor_y < e.lines.size() - 1)
-            {
-                e.cursor_y++;
-                e.cursor_x = 0;
-            }
+            editor_right();
         }
         break;
         case (GLFW_KEY_LEFT_CONTROL):
@@ -204,58 +96,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         break;
         case (GLFW_KEY_BACKSPACE):
         {
-            if (e.cursor_x == 0 && e.cursor_y > 0)
-            {
-                int prev_line_length = e.lines[e.cursor_y - 1].length();
-                e.lines[e.cursor_y - 1] += e.lines[e.cursor_y];
-                e.lines.erase(e.lines.begin() + e.cursor_y);
-                e.cursor_y--;
-                e.cursor_x = prev_line_length;
-            }
-            else if (CTRL_PRESSED)
-            {
-                // Delete to the nearest space or bracket
-                while (e.cursor_x > 0 && !std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]) &&
-                       e.lines[e.cursor_y][e.cursor_x - 1] != '(' && e.lines[e.cursor_y][e.cursor_x - 1] != '[' &&
-                       e.lines[e.cursor_y][e.cursor_x - 1] != '{')
-                {
-                    e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                    e.cursor_x--;
-                }
-                if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
-                {
-                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
-                    {
-                        e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                        e.cursor_x--;
-                    }
-                }
-            }
-            else if (e.cursor_x > 0)
-            {
-                if (e.cursor_x >= TAB.length() && e.lines[e.cursor_y].substr(e.cursor_x - TAB.length(), TAB.length()) == TAB)
-                {
-                    // Delete the whole tab
-                    e.lines[e.cursor_y].erase(e.cursor_x - TAB.length(), TAB.length());
-                    e.tab_offset_vec[e.cursor_y] -= TAB.length();
-                    e.cursor_x -= TAB.length();
-                }
-                else if (std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
-                {
-                    // Delete connected spaces
-                    while (e.cursor_x > 0 && std::isspace(e.lines[e.cursor_y][e.cursor_x - 1]))
-                    {
-                        e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                        e.cursor_x--;
-                    }
-                }
-                else
-                {
-                    // Delete a single character
-                    e.lines[e.cursor_y].erase(e.cursor_x - 1, 1);
-                    e.cursor_x--;
-                }
-            }
+            editor_backspace();
         }
         break;
         case (GLFW_KEY_HOME):

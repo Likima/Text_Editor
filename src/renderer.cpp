@@ -198,13 +198,6 @@ void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, lnd.vertices.size() * sizeof(float), lnd.vertices.data(), GL_DYNAMIC_DRAW);
 
-    // Check for OpenGL errors before drawing
-    GLenum err;
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL error before drawing: " << err << std::endl;
-    }
-
     // Draw the characters
     for (size_t i = 0; i < lnd.textures.size(); i++)
     {

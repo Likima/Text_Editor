@@ -69,4 +69,7 @@ should run the text editor on a file.
 ```
 on its own will create a generic file to store the text in.
 
+![Alt text](assets/hello_world.png)
+![Alt text](assets/video.mkv)
+
 Enjoy!

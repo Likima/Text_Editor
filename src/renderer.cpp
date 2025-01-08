@@ -100,10 +100,6 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
     glBufferData(GL_ARRAY_BUFFER, td.vertices.size() * sizeof(float), td.vertices.data(), GL_DYNAMIC_DRAW);
 
     GLenum err;
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL error before drawing: " << err << std::endl;
-    }
 
     // Draw the characters
     for (size_t i = 0; i < td.textures.size(); i++)
@@ -114,20 +110,11 @@ void renderText(GLuint &s, std::vector<std::string> text, float x, float y, floa
         glUniform3f(glGetUniformLocation(s, "textColor"), td.colors[i].x, td.colors[i].y, td.colors[i].z);
 
         glDrawArrays(GL_TRIANGLES, td.indices[i], 6);
-
-        while ((err = glGetError()) != GL_NO_ERROR)
-        {
-            std::cerr << "OpenGL error during drawing: " << err << std::endl;
-        }
     }
 
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL error after rendering: " << err << std::endl;
-    }
 }
 
 void renderLineNumbers(GLuint &s, float x, float y, glm::vec3 color)
